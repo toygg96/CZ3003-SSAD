@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://interface/screen_credits.gd" type="Script" id=2]
+[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/images/200px-Godot_logo.svg.png" type="Texture" id=4]
+
+[node name="screen_credits" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+expand = true
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="HBoxHeader" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 360.0
+margin_right = 1920.0
+margin_bottom = 474.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxHeader"]
+margin_left = 770.0
+margin_right = 1150.0
+margin_bottom = 114.0
+custom_fonts/font = ExtResource( 3 )
+text = "CREDITS"
+
+[node name="HBoxGodot" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 478.0
+margin_right = 1920.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 100, 50 )
+custom_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxGodot"]
+margin_left = 555.0
+margin_right = 755.0
+margin_bottom = 84.0
+texture = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxGodot"]
+margin_left = 765.0
+margin_right = 1365.0
+margin_bottom = 84.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxGodot/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 38.0
+size_flags_vertical = 3
+text = "CREDITS_GODOT"
+align = 3
+valign = 1
+
+[node name="GodotUrl" type="RichTextLabel" parent="VBoxContainer/HBoxGodot/VBoxContainer"]
+margin_top = 42.0
+margin_right = 600.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 600, 42 )
+rect_clip_content = false
+bbcode_enabled = true
+
+[node name="HBoxFont" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 566.0
+margin_right = 1920.0
+margin_bottom = 645.0
+rect_min_size = Vector2( 100, 70 )
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxFont"]
+margin_left = 309.0
+margin_right = 1611.0
+margin_bottom = 79.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxFont/VBoxContainer"]
+margin_right = 1302.0
+margin_bottom = 79.0
+text = "Dev Team:Joseph Fung, Jarrold Tan
+Documentation Team:Qwek Zhi Hui, Jan Owyeong, Rong En, Jia Cheng, Daniel Yap, Daniel Dtuli"
+
+[node name="HBoxControls" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 649.0
+margin_right = 1920.0
+margin_bottom = 719.0
+rect_min_size = Vector2( 100, 70 )
+alignment = 1
+
+[node name="Back" type="Button" parent="VBoxContainer/HBoxControls"]
+margin_left = 910.0
+margin_top = 10.0
+margin_right = 1010.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_vertical = 4
+text = "BACK"
+[connection signal="meta_clicked" from="VBoxContainer/HBoxGodot/VBoxContainer/GodotUrl" to="." method="_on_GodotUrl_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/HBoxControls/Back" to="." method="_on_Back_pressed"]
