@@ -15,9 +15,6 @@ func _on_RegisterButton_pressed() -> void:
 		elif confirm.text.empty():
 			notification.text =  "Missing confirmed password!"
 			return
-		elif password.text != confirm.text:
-			notification.text = "Confirmed password do not match the password entered!"
-			return
 		elif username.text.empty():
 			notification.text = "Missing username!"
 			return
@@ -28,7 +25,12 @@ func _on_RegisterButton_pressed() -> void:
 		if username.text == password.text:
 			notification.text = "Username and Password are identical, please choose a new password!"
 			return
-	Firebase.register(username.text, password.text, http)
+		elif password.text != confirm.text:
+			notification.text = "Confirmed password do not match the password entered!"
+			return
+		else:
+			Firebase.register(username.text, password.text, http)
+	
 
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:

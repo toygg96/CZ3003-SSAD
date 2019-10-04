@@ -8,6 +8,7 @@ const LOGIN_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/v
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
 
 var user_info := {}
+var username
 
 
 func _get_user_info(result: Array) -> Dictionary:
@@ -21,7 +22,7 @@ func _get_user_info(result: Array) -> Dictionary:
 func _get_request_headers() -> PoolStringArray:
 	return PoolStringArray([
 		"Content-Type: application/json",
-		"Authorization: Bearer %s" % user_info.token
+		"Authorization: Bearer %s" % user_info.token 
 	])
 
 
