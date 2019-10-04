@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://interface/profile/UserProfile.gd" type="Script" id=1]
+[ext_resource path="res://interface/assignment/CreateAssignment.gd" type="Script" id=1]
 [ext_resource path="res://interface/Title.tscn" type="PackedScene" id=2]
 [ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=3]
 
@@ -21,15 +21,16 @@ margin_bottom = -25.0
 custom_constants/separation = 50
 
 [node name="Title" parent="Container" instance=ExtResource( 2 )]
-text = "EDIT PROFILE"
+text = "CREATE ASSIGNMENT"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1870.0
-margin_bottom = 782.0
+margin_bottom = 906.0
 custom_constants/separation = 15
 
-[node name="Name" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="Question" type="HBoxContainer" parent="Container/VBoxContainer2"]
+editor/display_folded = true
 margin_left = 435.0
 margin_right = 1435.0
 margin_bottom = 89.0
@@ -38,16 +39,16 @@ size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Name"]
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Question"]
 margin_top = 5.0
 margin_right = 450.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Nickname:"
+text = "Question:"
 align = 2
 
-[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Name"]
+[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Question"]
 margin_left = 475.0
 margin_right = 1000.0
 margin_bottom = 89.0
@@ -55,7 +56,8 @@ size_flags_horizontal = 11
 custom_fonts/font = ExtResource( 3 )
 caret_blink = true
 
-[node name="Class" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="Answer1" type="HBoxContainer" parent="Container/VBoxContainer2"]
+editor/display_folded = true
 margin_left = 435.0
 margin_top = 104.0
 margin_right = 1435.0
@@ -65,16 +67,16 @@ size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Class"]
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Answer1"]
 margin_top = 5.0
 margin_right = 450.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Class:"
+text = "Answer 1:"
 align = 2
 
-[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Class"]
+[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Answer1"]
 margin_left = 475.0
 margin_right = 1000.0
 margin_bottom = 89.0
@@ -82,97 +84,112 @@ size_flags_horizontal = 11
 custom_fonts/font = ExtResource( 3 )
 caret_blink = true
 
-[node name="Strength" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="Answer2" type="HBoxContainer" parent="Container/VBoxContainer2"]
+editor/display_folded = true
 margin_left = 435.0
 margin_top = 208.0
 margin_right = 1435.0
-margin_bottom = 287.0
+margin_bottom = 297.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Strength"]
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Answer2"]
+margin_top = 5.0
 margin_right = 450.0
-margin_bottom = 79.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Strength:"
+text = "Answer 2:"
 align = 2
 
-[node name="Slider" type="HSlider" parent="Container/VBoxContainer2/Strength"]
+[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Answer2"]
 margin_left = 475.0
 margin_right = 1000.0
-margin_bottom = 79.0
+margin_bottom = 89.0
 size_flags_horizontal = 11
-size_flags_vertical = 1
-min_value = 1.0
-max_value = 5.0
-value = 2.0
-ticks_on_borders = true
+custom_fonts/font = ExtResource( 3 )
+caret_blink = true
 
-[node name="Intelligence" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="Answer3" type="HBoxContainer" parent="Container/VBoxContainer2"]
+editor/display_folded = true
 margin_left = 435.0
-margin_top = 302.0
+margin_top = 312.0
 margin_right = 1435.0
-margin_bottom = 381.0
+margin_bottom = 401.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Intelligence"]
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Answer3"]
+margin_top = 5.0
 margin_right = 450.0
-margin_bottom = 79.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Intelligence:"
+text = "Answer 3:"
 align = 2
 
-[node name="Slider" type="HSlider" parent="Container/VBoxContainer2/Intelligence"]
+[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Answer3"]
 margin_left = 475.0
 margin_right = 1000.0
-margin_bottom = 79.0
+margin_bottom = 89.0
 size_flags_horizontal = 11
-size_flags_vertical = 1
-min_value = 1.0
-max_value = 5.0
-value = 2.0
-ticks_on_borders = true
+custom_fonts/font = ExtResource( 3 )
+caret_blink = true
 
-[node name="Dexterity" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="Answer4" type="HBoxContainer" parent="Container/VBoxContainer2"]
+editor/display_folded = true
 margin_left = 435.0
-margin_top = 396.0
+margin_top = 416.0
 margin_right = 1435.0
-margin_bottom = 475.0
+margin_bottom = 505.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Dexterity"]
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Answer4"]
+margin_top = 5.0
 margin_right = 450.0
-margin_bottom = 79.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "Dexterity:"
+text = "Answer 4:"
 align = 2
 
-[node name="Slider" type="HSlider" parent="Container/VBoxContainer2/Dexterity"]
+[node name="LineEdit" type="LineEdit" parent="Container/VBoxContainer2/Answer4"]
 margin_left = 475.0
 margin_right = 1000.0
-margin_bottom = 79.0
+margin_bottom = 89.0
 size_flags_horizontal = 11
-size_flags_vertical = 1
-min_value = 1.0
-max_value = 5.0
-value = 2.0
-ticks_on_borders = true
+custom_fonts/font = ExtResource( 3 )
+caret_blink = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2"]
+margin_top = 520.0
+margin_right = 1870.0
+margin_bottom = 599.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Container/VBoxContainer2/HBoxContainer2"]
+margin_left = 641.0
+margin_right = 1183.0
+margin_bottom = 79.0
+custom_fonts/font = ExtResource( 3 )
+text = "Correct answer:"
+
+[node name="OptionButton" type="OptionButton" parent="Container/VBoxContainer2/HBoxContainer2"]
+margin_left = 1187.0
+margin_right = 1228.0
+margin_bottom = 79.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_top = 490.0
+margin_top = 614.0
 margin_right = 1870.0
-margin_bottom = 575.0
+margin_bottom = 699.0
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
@@ -189,6 +206,7 @@ text = "BACK"
 align = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
+editor/display_folded = true
 margin_left = 872.0
 margin_right = 1208.0
 margin_bottom = 85.0
@@ -202,9 +220,9 @@ text = "CONFIRM"
 align = 2
 
 [node name="Notification" type="Label" parent="Container"]
-margin_top = 832.0
+margin_top = 956.0
 margin_right = 1870.0
-margin_bottom = 911.0
+margin_bottom = 1035.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 align = 1

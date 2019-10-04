@@ -85,11 +85,11 @@ size_flags_stretch_ratio = 0.1
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxMain/HBoxHeader"]
-margin_left = 668.0
-margin_right = 1251.0
+margin_left = 173.0
+margin_right = 1747.0
 margin_bottom = 114.0
 custom_fonts/font = ExtResource( 4 )
-text = "GAME_NAME"
+text = "SOFTARE ENGINEERING QUIZ GAME"
 
 [node name="VBoxGreeting" type="VBoxContainer" parent="VBoxMain"]
 margin_top = 214.0
@@ -141,12 +141,12 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 150, 48 )
 text = "START GAME"
 
-[node name="JoinGame" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
+[node name="CreateLevel" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 52.0
 margin_right = 253.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 150, 48 )
-text = "JOIN GAME"
+text = "CREATE LEVEL"
 
 [node name="Leaderboards" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 104.0
@@ -190,5 +190,6 @@ margin_bottom = 412.0
 rect_min_size = Vector2( 150, 48 )
 text = "QUIT"
 [connection signal="pressed" from="VBoxMain/HBoxLanguage/HBoxProfile/Profile" to="." method="_on_Profile_pressed"]
+[connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
