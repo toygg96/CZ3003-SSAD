@@ -8,9 +8,26 @@ onready var notification : Label = $Container/Notification
 
 
 func _on_RegisterButton_pressed() -> void:
-	if password.text != confirm.text or username.text.empty() or password.text.empty():
-		notification.text = "Invalid password or username"
-		return
+	if username.text.empty() or password.text.empty() or confirm.text.empty():
+		if username.text.empty() and password.text.empty():
+			notification.text  = "Missing username and password!"
+			return
+		elif confirm.text.empty():
+			notification.text =  "Missing confirmed password!"
+			return
+		elif password.text != confirm.text:
+			notification.text = "Confirmed password do not match the password entered!"
+			return
+		elif username.text.empty():
+			notification.text = "Missing username!"
+			return
+		elif password.text.empty():
+			notification.text = "Missing password!"
+			return
+	else:
+		if username.text == password.text:
+			notification.text = "Username and Password are identical, please choose a new password!"
+			return
 	Firebase.register(username.text, password.text, http)
 
 
@@ -19,7 +36,7 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 	if response_code != 200:
 		notification.text = response_body.result.error.message.capitalize()
 	else:
-		notification.text = "Registration sucessful!"
+		notification.text = "Registration is sucessful!"
 		yield(get_tree().create_timer(2.0), "timeout")
 		get_tree().change_scene("res://interface/login/Login.tscn")
 	

@@ -10,7 +10,7 @@ func _on_LoginButton_pressed() -> void:
 	if username.text.empty() or password.text.empty():
 		notification.text = "Please, enter your username and password"
 		return
-	Firebase.login(username.text, password.text, http)
+	Firebase.login(username.text + "@ntu.com", password.text, http)
 
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
