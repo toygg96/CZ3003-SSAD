@@ -29,7 +29,7 @@ func _on_RegisterButton_pressed() -> void:
 			notification.text = "Confirmed password do not match the password entered!"
 			return
 		else:
-			Firebase.register(username.text, password.text, http)
+			Firebase.register(username.text + "@ntu.com", password.text, http)
 	
 
 
