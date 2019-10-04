@@ -26,11 +26,9 @@ var level := {
 func _ready() -> void:
 	add_items()
 	Firebase.get_document("levels/%s" % Firebase.user_info.id, http)
-	dropdown.connect("item_selected",self,"_on_Dropdown_item_selected")
 
 func _on_Button_pressed():
-	dropdown.disconnect("item_selected",self,"_on_Dropdown_item_selected")
-	return get_tree().change_scene("res://interface/MenuGame.tscn")
+	get_tree().change_scene("res://interface/MenuGame.tscn")
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary

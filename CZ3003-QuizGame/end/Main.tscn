@@ -17,6 +17,8 @@ func _on_LoginButton_pressed() -> void:
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -2.39166
+margin_bottom = -2.3916
 script = SubResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
