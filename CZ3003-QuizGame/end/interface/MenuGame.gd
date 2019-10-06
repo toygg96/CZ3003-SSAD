@@ -16,3 +16,6 @@ func _on_CreateLevel_pressed():
 
 func _ready() -> void:
 	username.text = "Welcome " + Firebase.username
+
+func _on_StartGame_pressed():
+	return get_tree().change_scene("res://interface/game/game.tscn")
