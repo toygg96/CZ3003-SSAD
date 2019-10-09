@@ -100,7 +100,6 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="PanelLives" type="Control" parent="Panel/VBoxContainer"]
-editor/display_folded = true
 margin_right = 1720.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 100 )
@@ -117,7 +116,6 @@ margin_right = -7.0
 margin_bottom = 7.0
 
 [node name="VBoxPlayerLives" type="VBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives"]
-editor/display_folded = true
 margin_right = 256.0
 margin_bottom = 100.0
 
@@ -383,6 +381,7 @@ expand = true
 stretch_mode = 6
 
 [node name="HBoxAnswers1" type="HBoxContainer" parent="Panel/VBoxContainer"]
+editor/display_folded = true
 margin_top = 688.0
 margin_right = 1720.0
 margin_bottom = 848.0
@@ -547,6 +546,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
 [node name="HBoxAnswers2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+editor/display_folded = true
 margin_top = 852.0
 margin_right = 1720.0
 margin_bottom = 1012.0
@@ -571,7 +571,7 @@ margin_bottom = -5.0
 custom_styles/panel = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxAnswers2/Panel/Panel"]
-editor/display_folded = true
+light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -708,7 +708,6 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
 [node name="HBoxConfirm" type="HBoxContainer" parent="Panel/VBoxContainer"]
-editor/display_folded = true
 margin_top = 1016.0
 margin_right = 1720.0
 margin_bottom = 1060.0
@@ -717,6 +716,7 @@ size_flags_stretch_ratio = 0.2
 alignment = 1
 
 [node name="Panel" type="Control" parent="Panel/VBoxContainer/HBoxConfirm"]
+editor/display_folded = true
 margin_right = 858.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
@@ -731,17 +731,17 @@ autowrap = true
 
 [node name="Confirm" type="Button" parent="Panel/VBoxContainer/HBoxConfirm"]
 visible = false
-margin_left = 232.0
-margin_right = 368.0
-margin_bottom = 40.0
+margin_left = 680.0
+margin_right = 941.0
+margin_bottom = 44.0
 text = "GAME_CONFIRM"
 
 [node name="Next" type="Button" parent="Panel/VBoxContainer/HBoxConfirm"]
 visible = false
-margin_left = 317.0
-margin_right = 422.0
-margin_bottom = 40.0
-text = "GAME_NEXT"
+margin_left = 813.0
+margin_right = 907.0
+margin_bottom = 44.0
+text = "NEXT"
 
 [node name="Panel2" type="Control" parent="Panel/VBoxContainer/HBoxConfirm"]
 margin_left = 862.0
@@ -773,4 +773,5 @@ anims/modulate = SubResource( 4 )
 [connection signal="gui_input" from="Panel/VBoxContainer/HBoxAnswers1/Panel2/Panel/VBoxContainer" to="." method="_on_Answer2_gui_input"]
 [connection signal="gui_input" from="Panel/VBoxContainer/HBoxAnswers2/Panel/Panel/VBoxContainer" to="." method="_on_Answer3_gui_input"]
 [connection signal="gui_input" from="Panel/VBoxContainer/HBoxAnswers2/Panel2/Panel/VBoxContainer" to="." method="_on_Answer4_gui_input"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxConfirm/Next" to="." method="_on_Next_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

@@ -174,13 +174,19 @@ func checkAnswer(ev,num):
 	elif (ev is InputEventMouseButton) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
 		highlight_answer(answer_nodes[num-1],answer_correct)
-		print("Answer3 is selected and its correct")
+		print("Answer" + str(num) + " is selected and its correct")
 		disableInput = true
+		next_button.show()
+		score += 1000
+		score_label_node.text = str(score)
 	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
 		highlight_answer(answer_nodes[num-1],answer_correct)
-		print("Answer3 is selected and its correct")
+		print("Answer" + str(num) + " is selected and its correct")
 		disableInput = true
+		next_button.show()
+		score += 1000
+		score_label_node.text = str(score)
 	else:
 		print(ev.as_text())
 		player_wrong.play()
@@ -188,3 +194,15 @@ func checkAnswer(ev,num):
 		var i = int(question.correctAns.stringValue[6])
 		highlight_answer(answer_nodes[i-1],answer_correct)
 		disableInput = true
+		next_button.show()	
+	
+func clear_answers(num):
+	highlight_answer(answer_nodes[num], answer_inner)
+
+func _on_Next_pressed():
+	questionNum = questionNum[0] + str(int(questionNum[1]) + 1)
+	Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/" +  world + "/" + questionNum , http)
+	disableInput = false
+	next_button.hide()
+	for i in [0,1,2,3]:
+		clear_answers(i)

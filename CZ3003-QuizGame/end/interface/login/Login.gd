@@ -29,3 +29,6 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 		notification.text = "Sign in sucessful!"
 		Firebase.username = username.text;
 		get_tree().change_scene("res://interface/MenuGame.tscn")
+
+func _on_BackButton_pressed():
+	get_tree().change_scene("res://Main.tscn") 

@@ -42,3 +42,6 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 		yield(get_tree().create_timer(2.0), "timeout")
 		get_tree().change_scene("res://interface/login/Login.tscn")
 	
+
+func _on_BackButton_pressed():
+	get_tree().change_scene("res://Main.tscn") 

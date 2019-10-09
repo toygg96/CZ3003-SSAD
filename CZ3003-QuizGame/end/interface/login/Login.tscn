@@ -24,7 +24,7 @@ text = "LOGIN SCREEN"
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1870.0
-margin_bottom = 500.0
+margin_bottom = 600.0
 custom_constants/separation = 15
 
 [node name="Username" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -91,14 +91,24 @@ size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
 text = "LOGIN"
 
+[node name="BackButton" type="Button" parent="Container/VBoxContainer2"]
+margin_left = 832.0
+margin_top = 308.0
+margin_right = 1038.0
+margin_bottom = 393.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 3 )
+text = "BACK"
+
 [node name="Notification" type="Label" parent="Container"]
-margin_top = 550.0
+margin_top = 650.0
 margin_right = 1870.0
-margin_bottom = 629.0
+margin_bottom = 729.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 align = 1
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="pressed" from="Container/VBoxContainer2/LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer2/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
