@@ -145,73 +145,46 @@ func _on_Answer1_gui_input(ev):
 		true:
 			pass
 		false:
-			if ev is InputEventMouseButton  and ev.pressed and question.correctAns.stringValue == "Answer1":
-				highlight_answer(answer_nodes[0],answer_correct)
-				print("Answer1 is selected and its correct")
-				disableInput = true
-			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer1":
-				highlight_answer(answer_nodes[0],answer_correct)
-				print("Answer1 is selected and its correct")
-				disableInput = true
-			else:
-				highlight_answer(answer_nodes[0],answer_missed)
-				var i = int(question.correctAns.stringValue[6])
-				highlight_answer(answer_nodes[i-1],answer_correct)
-				disableInput = true
+			checkAnswer(ev,1)
 	
 func _on_Answer2_gui_input(ev):
 	match disableInput:
 		true:
 			pass
 		false:
-			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer2":
-				highlight_answer(answer_nodes[1],answer_correct)
-				print("Answer2 is selected and its correct")
-				disableInput = true
-			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer2":
-				highlight_answer(answer_nodes[1],answer_correct)
-				print("Answer2 is selected and its correct")
-				disableInput = true
-			else:
-				highlight_answer(answer_nodes[1],answer_missed)
-				var i = int(question.correctAns.stringValue[6])
-				highlight_answer(answer_nodes[i-1],answer_correct)
-				disableInput = true
+			checkAnswer(ev,2)
 	
 func _on_Answer3_gui_input(ev):
 	match disableInput:
 		true:
 			pass
 		false:
-			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer3":
-				highlight_answer(answer_nodes[2],answer_correct)
-				print("Answer3 is selected and its correct")
-				disableInput = true
-			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer3":
-				highlight_answer(answer_nodes[2],answer_correct)
-				print("Answer3 is selected and its correct")
-				disableInput = true
-			else:
-				highlight_answer(answer_nodes[2],answer_missed)
-				var i = int(question.correctAns.stringValue[6])
-				highlight_answer(answer_nodes[i-1],answer_correct)
-				disableInput = true
+			checkAnswer(ev,3)
 		
 func _on_Answer4_gui_input(ev):
 	match disableInput:
 		true:
 			pass
 		false:
-			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer4":
-				highlight_answer(answer_nodes[3],answer_correct)
-				print("Answer4 is selected and its correct")
-				disableInput = true
-			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer4":
-				highlight_answer(answer_nodes[3],answer_correct)
-				print("Answer4 is selected and its correct")
-				disableInput = true
-			else:
-				highlight_answer(answer_nodes[3],answer_missed)
-				var i = int(question.correctAns.stringValue[6])
-				highlight_answer(answer_nodes[i-1],answer_correct)
-				disableInput = true
+			checkAnswer(ev,4)
+
+func checkAnswer(ev,num):
+	if (ev is InputEventMouseMotion):
+		pass
+	elif (ev is InputEventMouseButton) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
+		player_correct.play()
+		highlight_answer(answer_nodes[num-1],answer_correct)
+		print("Answer3 is selected and its correct")
+		disableInput = true
+	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
+		player_correct.play()
+		highlight_answer(answer_nodes[num-1],answer_correct)
+		print("Answer3 is selected and its correct")
+		disableInput = true
+	else:
+		print(ev.as_text())
+		player_wrong.play()
+		highlight_answer(answer_nodes[num-1],answer_missed)
+		var i = int(question.correctAns.stringValue[6])
+		highlight_answer(answer_nodes[i-1],answer_correct)
+		disableInput = true
