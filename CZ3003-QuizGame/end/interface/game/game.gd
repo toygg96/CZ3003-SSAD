@@ -93,47 +93,18 @@ var cpu_opponent_progress_threshold = 0
 var answer_result_timeout = 0
 var allow_next = true
 var opponent_lost = false
+var disableInput = false
 
-
-var new_level := false
+var new_question = false
 var information_sent := false
-var level := {
+var question := {
 	"question": {},
 	"answer1": {},
 	"answer2": {},
 	"answer3": {},
 	"answer4": {},
 	"correctAns": {}
-} setget set_level
-
-func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
-	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(result_body)
-	match response_code:
-		404:
-			print("No record found")
-			new_level = true
-			return
-		400:
-			print("HTTP 400")
-		200:
-			if information_sent:
-				print("Information saved successfully")
-				information_sent = false
-			self.level = result_body.fields
-
-func set_level(value: Dictionary) -> void:
-	level = value
-	quiz_node.text = level.question.stringValue
-	print("Question: " + level.question.stringValue)
-	print("Answer 1: " + level.answer1.stringValue)
-	print("Answer 2: " + level.answer2.stringValue)
-	print("Answer 3: " + level.answer3.stringValue)
-	print("Answer 4: " + level.answer4.stringValue)
-	answer_nodes[0].text = level.answer1.stringValue
-	answer_nodes[1].text = level.answer2.stringValue
-	answer_nodes[2].text = level.answer3.stringValue
-	answer_nodes[3].text = level.answer4.stringValue
+} setget set_question
 
 func _ready():
 	print(Firebase.user_info.id);
@@ -141,3 +112,106 @@ func _ready():
 
 func _on_ButtonQuit_pressed():
 	get_tree().change_scene("res://interface/MenuGame.tscn")
+	
+func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
+	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	print(result_body)
+	match response_code:
+		404:
+			print("No record found")
+			new_question = true
+			return
+		400:
+			print("HTTP 400")
+		200:
+			if information_sent:
+				print("Information saved successfully")
+				information_sent = false
+			self.question = result_body.fields
+
+func set_question(value: Dictionary) -> void:
+	question = value
+	quiz_node.text = question.question.stringValue
+	answer_nodes[0].text = question.answer1.stringValue
+	answer_nodes[1].text = question.answer2.stringValue
+	answer_nodes[2].text = question.answer3.stringValue
+	answer_nodes[3].text = question.answer4.stringValue
+
+func highlight_answer(answer_node, style):
+	answer_node.get_parent().get_parent().set("custom_styles/panel", style)
+
+func _on_Answer1_gui_input(ev):
+	match disableInput:
+		true:
+			pass
+		false:
+			if ev is InputEventMouseButton  and ev.pressed and question.correctAns.stringValue == "Answer1":
+				highlight_answer(answer_nodes[0],answer_correct)
+				print("Answer1 is selected and its correct")
+				disableInput = true
+			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer1":
+				highlight_answer(answer_nodes[0],answer_correct)
+				print("Answer1 is selected and its correct")
+				disableInput = true
+			else:
+				highlight_answer(answer_nodes[0],answer_missed)
+				var i = int(question.correctAns.stringValue[6])
+				highlight_answer(answer_nodes[i-1],answer_correct)
+				disableInput = true
+	
+func _on_Answer2_gui_input(ev):
+	match disableInput:
+		true:
+			pass
+		false:
+			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer2":
+				highlight_answer(answer_nodes[1],answer_correct)
+				print("Answer2 is selected and its correct")
+				disableInput = true
+			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer2":
+				highlight_answer(answer_nodes[1],answer_correct)
+				print("Answer2 is selected and its correct")
+				disableInput = true
+			else:
+				highlight_answer(answer_nodes[1],answer_missed)
+				var i = int(question.correctAns.stringValue[6])
+				highlight_answer(answer_nodes[i-1],answer_correct)
+				disableInput = true
+	
+func _on_Answer3_gui_input(ev):
+	match disableInput:
+		true:
+			pass
+		false:
+			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer3":
+				highlight_answer(answer_nodes[2],answer_correct)
+				print("Answer3 is selected and its correct")
+				disableInput = true
+			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer3":
+				highlight_answer(answer_nodes[2],answer_correct)
+				print("Answer3 is selected and its correct")
+				disableInput = true
+			else:
+				highlight_answer(answer_nodes[2],answer_missed)
+				var i = int(question.correctAns.stringValue[6])
+				highlight_answer(answer_nodes[i-1],answer_correct)
+				disableInput = true
+		
+func _on_Answer4_gui_input(ev):
+	match disableInput:
+		true:
+			pass
+		false:
+			if ev is InputEventMouseButton and ev.pressed and question.correctAns.stringValue == "Answer4":
+				highlight_answer(answer_nodes[3],answer_correct)
+				print("Answer4 is selected and its correct")
+				disableInput = true
+			elif ev is InputEventScreenTouch and ev.pressed and question.correctAns.stringValue == "Answer4":
+				highlight_answer(answer_nodes[3],answer_correct)
+				print("Answer4 is selected and its correct")
+				disableInput = true
+			else:
+				highlight_answer(answer_nodes[3],answer_missed)
+				var i = int(question.correctAns.stringValue[6])
+				highlight_answer(answer_nodes[i-1],answer_correct)
+				disableInput = true
