@@ -25,6 +25,8 @@ onready var answer_panel_1_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Pan
 onready var answer_panel_2_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel2")
 onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel")
 onready var answer_panel_4_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel2")
+onready var world = "World1"
+onready var questionNum = "Q1"
 
 onready var answer_nodes = [
 answer_panel_1_node.get_node("Panel/VBoxContainer/Answer1"),
@@ -135,4 +137,7 @@ func set_level(value: Dictionary) -> void:
 
 func _ready():
 	print(Firebase.user_info.id);
-	Firebase.get_document("levels/%s" % Firebase.user_info.id, http)
+	Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/" +  world + "/" + questionNum , http)
+
+func _on_ButtonQuit_pressed():
+	get_tree().change_scene("res://interface/MenuGame.tscn")

@@ -55,18 +55,15 @@ func save_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_POST, body)
 
-
 func get_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_GET)
-
 
 func update_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 	var document := { "fields": fields }
 	var body := to_json(document)
 	var url := FIRESTORE_URL + path
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_PATCH, body)
-
 
 func delete_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
