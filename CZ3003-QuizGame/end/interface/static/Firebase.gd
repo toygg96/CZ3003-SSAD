@@ -9,6 +9,7 @@ const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/database
 
 var user_info := {}
 var username
+var worldSelected
 
 
 func _get_user_info(result: Array) -> Dictionary:

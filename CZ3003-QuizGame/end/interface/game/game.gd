@@ -25,8 +25,9 @@ onready var answer_panel_1_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Pan
 onready var answer_panel_2_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel2")
 onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel")
 onready var answer_panel_4_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel2")
-onready var world = "World1"
-onready var questionNum = "Q1"
+onready var questionNum = 1
+onready var teacherToken = "7FlV5gLCeBTYuGnvLd0k0W1dHps2"
+onready var teacherTokenBool = true
 
 onready var answer_nodes = [
 answer_panel_1_node.get_node("Panel/VBoxContainer/Answer1"),
@@ -108,7 +109,7 @@ var question := {
 
 func _ready():
 	print(Firebase.user_info.id);
-	Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/" +  world + "/" + questionNum , http)
+	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
 
 func _on_ButtonQuit_pressed():
 	get_tree().change_scene("res://interface/MenuGame.tscn")
@@ -120,6 +121,15 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 		404:
 			print("No record found")
 			new_question = true
+			teacherToken = Firebase.user_info.id
+			questionNum = 1
+			next_button.hide()
+			if teacherTokenBool == false:
+				_on_ButtonQuit_pressed()
+			for i in [0,1,2,3]:
+				clear_answers(i)
+			Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
+			teacherTokenBool = false
 			return
 		400:
 			print("HTTP 400")
@@ -199,9 +209,15 @@ func checkAnswer(ev,num):
 func clear_answers(num):
 	highlight_answer(answer_nodes[num], answer_inner)
 
+func clear_questionsAnswers():
+	quiz_node.set_text("")
+	for i in [0,1,2,3]:
+		answer_nodes[i].set_text("")
+
 func _on_Next_pressed():
-	questionNum = questionNum[0] + str(int(questionNum[1]) + 1)
-	Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/" +  world + "/" + questionNum , http)
+	questionNum = questionNum + 1
+	print("questionNum: Q" + str(questionNum))
+	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
 	disableInput = false
 	next_button.hide()
 	for i in [0,1,2,3]:
