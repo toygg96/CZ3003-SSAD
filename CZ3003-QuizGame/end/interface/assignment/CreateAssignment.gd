@@ -2,6 +2,7 @@ extends Node
 
 # Declare member variables here. Examples:
 onready var http : HTTPRequest = $HTTPRequest
+onready var title = $Container/Title
 onready var question : Label = $Container/VBoxContainer2/Question/LineEdit
 onready var answer1 : Label = $Container/VBoxContainer2/Answer1/LineEdit
 onready var notification : Label = $Container/Notification
@@ -32,6 +33,10 @@ func _ready() -> void:
 	add_items()
 	add_difficultyItems()
 	add_questionItems()
+	if(Firebase.username == "teacher"):
+		title.set_text("Create Assignment")
+	else:
+		title.set_text("Create Level")
 
 func _on_Button_pressed():
 	get_tree().change_scene("res://interface/MenuGame.tscn")
