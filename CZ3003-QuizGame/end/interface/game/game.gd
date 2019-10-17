@@ -109,7 +109,7 @@ var question := {
 
 func _ready():
 	print(Firebase.user_info.id);
-	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
+	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
 
 func _on_ButtonQuit_pressed():
 	get_tree().change_scene("res://interface/MenuGame.tscn")
@@ -128,7 +128,7 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 				_on_ButtonQuit_pressed()
 			for i in [0,1,2,3]:
 				clear_answers(i)
-			Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
+			Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
 			teacherTokenBool = false
 			return
 		400:
@@ -217,7 +217,7 @@ func clear_questionsAnswers():
 func _on_Next_pressed():
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
-	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + ("Q"+str(questionNum)) , http)
+	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
 	disableInput = false
 	next_button.hide()
 	for i in [0,1,2,3]:

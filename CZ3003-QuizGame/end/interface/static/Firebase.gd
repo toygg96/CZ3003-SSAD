@@ -10,6 +10,7 @@ const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/database
 var user_info := {}
 var username
 var worldSelected
+var difficultySelected
 
 
 func _get_user_info(result: Array) -> Dictionary:
@@ -58,6 +59,7 @@ func save_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 
 func get_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
+	print("URL: " + url)
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_GET)
 
 func update_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:

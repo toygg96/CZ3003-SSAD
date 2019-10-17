@@ -8,12 +8,12 @@ onready var notification : Label = $Container/Notification
 onready var answer2 : Label = $Container/VBoxContainer2/Answer2/LineEdit
 onready var answer3 : Label = $Container/VBoxContainer2/Answer3/LineEdit
 onready var answer4 : Label = $Container/VBoxContainer2/Answer4/LineEdit
-onready var worldDropdown : OptionButton  = $Container/VBoxContainer2/Selections/WorldDropdown
+onready var difficultyDropdown : OptionButton  = $Container/VBoxContainer2/Selections/DifficultyDropdown
 onready var questionNumDropdown : OptionButton  = $Container/VBoxContainer2/Selections/QuestionNumDropdown
 onready var dropdown : OptionButton  = $Container/VBoxContainer2/HBoxContainer2/Dropdown
 onready var itemSelected
 onready var questionNumSelected
-onready var worldSelected = "NULL"
+onready var difficultySelected = "NULL"
 
 
 var new_question := false
@@ -30,7 +30,7 @@ var questionObj := {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_items()
-	add_Worlditems()
+	add_difficultyItems()
 	add_questionItems()
 
 func _on_Button_pressed():
@@ -38,7 +38,7 @@ func _on_Button_pressed():
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(result_body)
+	print(response_code)
 	match response_code:
 		404:
 			notification.text = "No record found"
@@ -58,7 +58,7 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 
 			else :
 				notification.text = "Information retrieved successfully"			
-				self.questionObj = result_body.fields
+				self.questionObj = result_body.fields	
 			new_question = false
 
 
@@ -75,9 +75,9 @@ func _on_ConfirmButton_pressed() -> void:
 	match new_question:
 		true:
 			print(Firebase.user_info.id)
-			Firebase.save_document("worlds/%s" % Firebase.user_info.id + "/" +  worldSelected + "/?documentId=" + questionNumSelected, questionObj, http)
+			Firebase.save_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/?documentId=" + questionNumSelected, questionObj, http)
 		false:
-			Firebase.update_document("worlds/%s" % Firebase.user_info.id + "/" +  worldSelected + "/" + questionNumSelected, questionObj, http)
+			Firebase.update_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/" + questionNumSelected, questionObj, http)
 	information_sent = true
 
 
@@ -106,14 +106,12 @@ func add_items():
 	 dropdown.add_item("Answer3")
 	 dropdown.add_item("Answer4")
 	 
-func add_Worlditems():
-	 worldDropdown.add_item("NULL")
-	 worldDropdown.add_separator()
-	 worldDropdown.add_item("World1")
-	 worldDropdown.add_item("World2")
-	 worldDropdown.add_item("World3")
-	 worldDropdown.add_item("World4")
-	 worldDropdown.add_item("World5")
+func add_difficultyItems():
+	 difficultyDropdown.add_item("NULL")
+	 difficultyDropdown.add_separator()
+	 difficultyDropdown.add_item("EASY")
+	 difficultyDropdown.add_item("DIFFICULT")
+	 difficultyDropdown.add_item("LUNATIC")
 	
  
 func add_questionItems():
@@ -124,11 +122,6 @@ func add_questionItems():
 	 questionNumDropdown.add_item("Q3")
 	 questionNumDropdown.add_item("Q4")
 	 questionNumDropdown.add_item("Q5")
-	 questionNumDropdown.add_item("Q6")
-	 questionNumDropdown.add_item("Q7")
-	 questionNumDropdown.add_item("Q8")
-	 questionNumDropdown.add_item("Q9")
-	 questionNumDropdown.add_item("Q10")
 	
 func clear_all():
 	dropdown.clear()
@@ -141,12 +134,13 @@ func clear_all():
 func _on_Dropdown_item_selected(ID):
 	itemSelected = dropdown.get_item_text(ID)
 
-func _on_WorldDropdown_item_selected(ID):
-	worldSelected = worldDropdown.get_item_text(ID)
-
+func _on_DifficultyDropdown_item_selected(ID):
+	difficultySelected = difficultyDropdown.get_item_text(ID)
+	
 func _on_QuestionNumDropdown_item_selected(ID):
 	questionNumSelected = questionNumDropdown.get_item_text(ID)
-	if(worldSelected != "NULL"):
-		Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/" +  worldSelected + "/" + questionNumSelected , http)
+	if(difficultySelected != "NULL"):
+		Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/" + questionNumSelected , http)
 	else :
-		notification.text = "Please choose a world"
+		notification.text = "Please choose a difficulty"
+
