@@ -200,7 +200,7 @@ func checkAnswer(ev,num):
 	else:
 		print(ev.as_text())
 		player_wrong.play()
-		highlight_answer(answer_nodes[num-1],answer_missed)
+		highlight_answer(answer_nodes[num-1],answer_error)
 		var i = int(question.correctAns.stringValue[6])
 		highlight_answer(answer_nodes[i-1],answer_correct)
 		disableInput = true
