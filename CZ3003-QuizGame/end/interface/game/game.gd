@@ -125,19 +125,25 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			questionNum = 1
 			next_button.hide()
 			if teacherTokenBool == false:
-				_on_ButtonQuit_pressed()
-			for i in [0,1,2,3]:
-				clear_answers(i)
-			Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
-			teacherTokenBool = false
-			return
+				#http.set_use_threads(true)
+				Firebase.profile.overallScore = { "integerValue": score }
+				Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
+				information_sent = true
+			else:
+				for i in [0,1,2,3]:
+					clear_answers(i)
+				Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
+				teacherTokenBool = false
+				return
 		400:
 			print("HTTP 400")
 		200:
 			if information_sent:
 				print("Information saved successfully")
 				information_sent = false
-			self.question = result_body.fields
+				_on_ButtonQuit_pressed()
+			else:
+				self.question = result_body.fields
 
 func set_question(value: Dictionary) -> void:
 	question = value
@@ -198,7 +204,6 @@ func checkAnswer(ev,num):
 		score += 1000
 		score_label_node.text = str(score)
 	else:
-		print(ev.as_text())
 		player_wrong.play()
 		highlight_answer(answer_nodes[num-1],answer_error)
 		var i = int(question.correctAns.stringValue[6])

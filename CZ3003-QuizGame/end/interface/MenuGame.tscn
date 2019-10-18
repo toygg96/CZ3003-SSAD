@@ -37,11 +37,11 @@ size_flags_horizontal = 3
 
 [node name="Profile" type="Button" parent="VBoxMain/HBoxLanguage/HBoxProfile"]
 margin_top = 19.0
-margin_right = 266.0
+margin_right = 282.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 150, 48 )
 size_flags_vertical = 4
-text = "CREATE PROFILE"
+text = "VIEW CHARACTER"
 
 [node name="VBoxLanguage" type="VBoxContainer" parent="VBoxMain/HBoxLanguage"]
 margin_left = 885.0
@@ -131,75 +131,79 @@ margin_bottom = 582.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxMain/VBoxContainer/HBoxMenu"]
-margin_left = 833.0
-margin_right = 1086.0
+margin_left = 785.0
+margin_right = 1134.0
 margin_bottom = 460.0
 rect_min_size = Vector2( 150, 100 )
 alignment = 1
 
 [node name="StartGame" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_right = 253.0
+margin_right = 349.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 150, 48 )
 text = "START GAME"
 
 [node name="CreateLevel" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 52.0
-margin_right = 253.0
+margin_right = 349.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 150, 48 )
 text = "CREATE LEVEL"
 
-[node name="Leaderboards" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
+[node name="Upgrade Character" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 104.0
-margin_right = 253.0
+margin_right = 349.0
 margin_bottom = 152.0
+rect_min_size = Vector2( 150, 48 )
+text = "UPGRADE CHARACTER"
+
+[node name="Leaderboards" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
+margin_top = 156.0
+margin_right = 349.0
+margin_bottom = 204.0
 rect_min_size = Vector2( 150, 48 )
 text = "LEADERBOARDS"
 
 [node name="Stats" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 156.0
-margin_right = 253.0
-margin_bottom = 204.0
+margin_top = 208.0
+margin_right = 349.0
+margin_bottom = 256.0
 rect_min_size = Vector2( 150, 48 )
 text = "STATS"
 
 [node name="Settings" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 208.0
-margin_right = 253.0
-margin_bottom = 256.0
+margin_top = 260.0
+margin_right = 349.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 150, 48 )
 text = "SETTINGS"
 
 [node name="Credits" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 260.0
-margin_right = 253.0
-margin_bottom = 308.0
+margin_top = 312.0
+margin_right = 349.0
+margin_bottom = 360.0
 rect_min_size = Vector2( 150, 48 )
 text = "CREDITS"
 
-[node name="About" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 312.0
-margin_right = 253.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 150, 48 )
-text = "ABOUT"
-
 [node name="Signout" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 364.0
-margin_right = 253.0
+margin_right = 349.0
 margin_bottom = 408.0
 text = "SIGN OUT"
 
 [node name="Quit" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 412.0
-margin_right = 253.0
+margin_right = 349.0
 margin_bottom = 460.0
 rect_min_size = Vector2( 150, 48 )
 text = "QUIT"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="pressed" from="VBoxMain/HBoxLanguage/HBoxProfile/Profile" to="." method="_on_Profile_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
+[connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Upgrade Character" to="." method="_on_Upgrade_Character_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Signout" to="." method="_on_Signout_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

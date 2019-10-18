@@ -15,23 +15,24 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
-margin_top = 25.0
-margin_right = -25.0
-margin_bottom = -25.0
+margin_top = 14.0
+margin_right = -22.0
+margin_bottom = -5.0
 custom_constants/separation = 50
 
 [node name="Title" parent="Container" instance=ExtResource( 2 )]
+margin_right = 1873.0
 text = "EDIT PROFILE"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
-margin_right = 1870.0
+margin_right = 1873.0
 margin_bottom = 782.0
 custom_constants/separation = 15
 
 [node name="Name" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 435.0
-margin_right = 1435.0
+margin_left = 436.0
+margin_right = 1436.0
 margin_bottom = 89.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
@@ -56,9 +57,9 @@ custom_fonts/font = ExtResource( 3 )
 caret_blink = true
 
 [node name="Class" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 435.0
+margin_left = 436.0
 margin_top = 104.0
-margin_right = 1435.0
+margin_right = 1436.0
 margin_bottom = 193.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
@@ -83,9 +84,9 @@ custom_fonts/font = ExtResource( 3 )
 caret_blink = true
 
 [node name="Strength" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 435.0
+margin_left = 436.0
 margin_top = 208.0
-margin_right = 1435.0
+margin_right = 1436.0
 margin_bottom = 287.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
@@ -112,9 +113,9 @@ value = 2.0
 ticks_on_borders = true
 
 [node name="Intelligence" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 435.0
+margin_left = 436.0
 margin_top = 302.0
-margin_right = 1435.0
+margin_right = 1436.0
 margin_bottom = 381.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
@@ -140,47 +141,44 @@ max_value = 5.0
 value = 2.0
 ticks_on_borders = true
 
-[node name="Dexterity" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 435.0
+[node name="Score" type="HBoxContainer" parent="Container/VBoxContainer2"]
+margin_left = 436.0
 margin_top = 396.0
-margin_right = 1435.0
+margin_right = 1436.0
 margin_bottom = 475.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
 alignment = 1
 
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Dexterity"]
-margin_right = 450.0
+[node name="Label" type="Label" parent="Container/VBoxContainer2/Score"]
+margin_left = 262.0
+margin_right = 712.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 450, 0 )
+rect_pivot_offset = Vector2( 292.881, 18.7144 )
 custom_fonts/font = ExtResource( 3 )
-text = "Dexterity:"
-align = 2
+text = "Score:"
 
-[node name="Slider" type="HSlider" parent="Container/VBoxContainer2/Dexterity"]
-margin_left = 475.0
-margin_right = 1000.0
+[node name="Label2" type="Label" parent="Container/VBoxContainer2/Score"]
+margin_left = 737.0
+margin_right = 737.0
 margin_bottom = 79.0
-size_flags_horizontal = 11
-size_flags_vertical = 1
-min_value = 1.0
-max_value = 5.0
-value = 2.0
-ticks_on_borders = true
+custom_fonts/font = ExtResource( 3 )
+align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_top = 490.0
-margin_right = 1870.0
+margin_right = 1873.0
 margin_bottom = 575.0
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 662.0
-margin_right = 868.0
+margin_left = 663.0
+margin_right = 869.0
 margin_bottom = 85.0
 
-[node name="Button" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer2"]
+[node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer2"]
 margin_right = 206.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 206, 85 )
@@ -189,8 +187,8 @@ text = "BACK"
 align = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 872.0
-margin_right = 1208.0
+margin_left = 873.0
+margin_right = 1209.0
 margin_bottom = 85.0
 
 [node name="ConfirmButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer"]
@@ -203,7 +201,7 @@ align = 2
 
 [node name="Notification" type="Label" parent="Container"]
 margin_top = 832.0
-margin_right = 1870.0
+margin_right = 1873.0
 margin_bottom = 911.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
@@ -211,6 +209,6 @@ align = 1
 autowrap = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer2/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer2/BackButton" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
