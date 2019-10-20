@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://interface/screen_credits.gd" type="Script" id=2]
-[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/images/200px-Godot_logo.svg.png" type="Texture" id=4]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=3]
+[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/images/200px-Godot_logo.svg.png" type="Texture" id=5]
 
 [node name="screen_credits" type="TextureRect"]
 anchor_right = 1.0
@@ -11,6 +12,11 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -27,7 +33,7 @@ alignment = 1
 margin_left = 770.0
 margin_right = 1150.0
 margin_bottom = 114.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "CREDITS"
 
 [node name="HBoxGodot" type="HBoxContainer" parent="VBoxContainer"]
@@ -42,7 +48,7 @@ alignment = 1
 margin_left = 555.0
 margin_right = 755.0
 margin_bottom = 84.0
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxGodot"]
 margin_left = 765.0

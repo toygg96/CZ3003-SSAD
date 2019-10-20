@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/profile/UserProfile.gd" type="Script" id=1]
-[ext_resource path="res://interface/Title.tscn" type="PackedScene" id=2]
-[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=2]
+[ext_resource path="res://interface/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=4]
 
 [node name="UserProfile" type="Control"]
 anchor_right = 1.0
@@ -10,6 +11,12 @@ anchor_bottom = 1.0
 margin_top = -1.0
 margin_bottom = -1.0
 script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 1.0
+margin_right = 1920.0
+margin_bottom = 1081.0
+texture = ExtResource( 2 )
 
 [node name="Container" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -20,7 +27,7 @@ margin_right = -22.0
 margin_bottom = -5.0
 custom_constants/separation = 50
 
-[node name="Title" parent="Container" instance=ExtResource( 2 )]
+[node name="Title" parent="Container" instance=ExtResource( 3 )]
 margin_right = 1873.0
 text = "EDIT PROFILE"
 
@@ -44,7 +51,7 @@ margin_top = 5.0
 margin_right = 450.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Nickname:"
 align = 2
 
@@ -53,7 +60,7 @@ margin_left = 475.0
 margin_right = 1000.0
 margin_bottom = 89.0
 size_flags_horizontal = 11
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 caret_blink = true
 
 [node name="Class" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -71,7 +78,7 @@ margin_top = 5.0
 margin_right = 450.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 450, 0 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Class:"
 align = 2
 
@@ -80,7 +87,7 @@ margin_left = 475.0
 margin_right = 1000.0
 margin_bottom = 89.0
 size_flags_horizontal = 11
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 caret_blink = true
 
 [node name="Strength" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -97,7 +104,7 @@ alignment = 1
 margin_right = 450.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 450, 0 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Strength:"
 align = 2
 
@@ -126,7 +133,7 @@ alignment = 1
 margin_right = 450.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 450, 0 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Intelligence:"
 align = 2
 
@@ -157,14 +164,14 @@ margin_right = 712.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 450, 0 )
 rect_pivot_offset = Vector2( 292.881, 18.7144 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "Score:"
 
 [node name="Label2" type="Label" parent="Container/VBoxContainer2/Score"]
 margin_left = 737.0
 margin_right = 737.0
 margin_bottom = 79.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -182,7 +189,7 @@ margin_bottom = 85.0
 margin_right = 206.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 206, 85 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "BACK"
 align = 0
 
@@ -195,7 +202,7 @@ margin_bottom = 85.0
 margin_right = 336.0
 margin_bottom = 85.0
 size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "CONFIRM"
 align = 2
 
@@ -204,7 +211,7 @@ margin_top = 832.0
 margin_right = 1873.0
 margin_bottom = 911.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 align = 1
 autowrap = true
 

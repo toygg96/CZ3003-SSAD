@@ -1,19 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://interface/game/game.gd" type="Script" id=2]
-[ext_resource path="res://styles/life_full.tres" type="StyleBox" id=3]
-[ext_resource path="res://styles/score_font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/images/quit_quiz_normal.png" type="Texture" id=5]
-[ext_resource path="res://assets/images/quit_quiz_hover.png" type="Texture" id=6]
-[ext_resource path="res://styles/dark_outer.tres" type="StyleBox" id=7]
-[ext_resource path="res://styles/dark_inner.tres" type="StyleBox" id=8]
-[ext_resource path="res://styles/question_font.tres" type="DynamicFont" id=9]
-[ext_resource path="res://styles/answer_text.tres" type="StyleBox" id=10]
-[ext_resource path="res://styles/answer_font.tres" type="DynamicFont" id=11]
-[ext_resource path="res://styles/respondent_font.tres" type="DynamicFont" id=12]
-[ext_resource path="res://sound/wrong.wav" type="AudioStream" id=13]
-[ext_resource path="res://sound/correct.wav" type="AudioStream" id=14]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_01.png" type="Texture" id=3]
+[ext_resource path="res://styles/life_full.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/score_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/images/quit_quiz_normal.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/quit_quiz_hover.png" type="Texture" id=7]
+[ext_resource path="res://styles/dark_outer.tres" type="StyleBox" id=8]
+[ext_resource path="res://styles/dark_inner.tres" type="StyleBox" id=9]
+[ext_resource path="res://styles/question_font.tres" type="DynamicFont" id=10]
+[ext_resource path="res://styles/answer_text.tres" type="StyleBox" id=11]
+[ext_resource path="res://styles/answer_font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://styles/respondent_font.tres" type="DynamicFont" id=13]
+[ext_resource path="res://sound/wrong.wav" type="AudioStream" id=14]
+[ext_resource path="res://sound/correct.wav" type="AudioStream" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0 )
@@ -81,6 +82,11 @@ theme = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
 
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -134,35 +140,35 @@ margin_bottom = 90.0
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life2" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives"]
 margin_left = 52.0
 margin_right = 100.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life3" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives"]
 margin_left = 104.0
 margin_right = 152.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life4" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives"]
 margin_left = 156.0
 margin_right = 204.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life5" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives"]
 margin_left = 208.0
 margin_right = 256.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="VBoxInfo" type="VBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives"]
 editor/display_folded = true
@@ -185,7 +191,7 @@ margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 align = 1
 valign = 1
 autowrap = true
@@ -209,8 +215,8 @@ margin_top = 5.0
 margin_right = 48.0
 margin_bottom = 53.0
 rect_min_size = Vector2( 48, 48 )
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 6 )
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
 
 [node name="OpponentScoreLabel" type="Label" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore"]
 margin_left = 624.0
@@ -219,7 +225,7 @@ margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 10.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 align = 1
 valign = 1
 autowrap = true
@@ -275,35 +281,35 @@ alignment = 2
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life2" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives"]
 margin_left = 52.0
 margin_right = 100.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life3" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives"]
 margin_left = 104.0
 margin_right = 152.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life4" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives"]
 margin_left = 156.0
 margin_right = 204.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Life5" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives"]
 margin_left = 208.0
 margin_right = 256.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="HBoxQuestion" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_top = 104.0
@@ -321,7 +327,7 @@ margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxQuestion/TextPanel"]
 anchor_right = 1.0
@@ -332,7 +338,7 @@ margin_right = -5.0
 margin_bottom = -5.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="QuizText" type="Label" parent="Panel/VBoxContainer/HBoxQuestion/TextPanel/Panel"]
 anchor_left = 0.1
@@ -344,7 +350,7 @@ margin_top = -25.8
 margin_right = -0.899902
 margin_bottom = 25.8
 size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = ExtResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
@@ -357,7 +363,7 @@ margin_right = 1720.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxQuestion/MediaPanel"]
 editor/display_folded = true
@@ -369,7 +375,7 @@ margin_right = -5.0
 margin_bottom = -5.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxQuestion/MediaPanel/Panel"]
 anchor_right = 1.0
@@ -394,7 +400,7 @@ margin_right = 858.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxAnswers1/Panel"]
 anchor_right = 1.0
@@ -403,7 +409,7 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxAnswers1/Panel/Panel"]
 editor/display_folded = true
@@ -420,8 +426,8 @@ rect_min_size = Vector2( 110, 106 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
@@ -439,8 +445,8 @@ margin_top = 3.0
 margin_right = 422.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 
 [node name="LabelGamepadHint" type="Label" parent="Panel/VBoxContainer/HBoxAnswers1/Panel/Panel/VBoxContainer/HBoxContainer"]
@@ -450,8 +456,8 @@ margin_top = 3.0
 margin_right = 564.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "[LB]"
 align = 1
@@ -462,8 +468,8 @@ margin_top = 3.0
 margin_right = 848.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
@@ -473,7 +479,7 @@ margin_right = 1720.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxAnswers1/Panel2"]
 anchor_right = 1.0
@@ -482,7 +488,7 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxAnswers1/Panel2/Panel"]
 anchor_right = 1.0
@@ -498,8 +504,8 @@ rect_min_size = Vector2( 110, 106 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
@@ -517,8 +523,8 @@ margin_top = 3.0
 margin_right = 422.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 
 [node name="LabelGamepadHint" type="Label" parent="Panel/VBoxContainer/HBoxAnswers1/Panel2/Panel/VBoxContainer/HBoxContainer"]
@@ -528,8 +534,8 @@ margin_top = 3.0
 margin_right = 564.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "[RB]"
 align = 1
@@ -540,8 +546,8 @@ margin_top = 3.0
 margin_right = 848.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
@@ -558,7 +564,7 @@ margin_right = 858.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxAnswers2/Panel"]
 anchor_right = 1.0
@@ -567,7 +573,7 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxAnswers2/Panel/Panel"]
 light_mask = 0
@@ -582,8 +588,8 @@ rect_min_size = Vector2( 110, 106 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
@@ -601,8 +607,8 @@ margin_top = 3.0
 margin_right = 422.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 
 [node name="LabelGamepadHint" type="Label" parent="Panel/VBoxContainer/HBoxAnswers2/Panel/Panel/VBoxContainer/HBoxContainer"]
@@ -612,8 +618,8 @@ margin_top = 3.0
 margin_right = 350.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "[LT]"
 align = 1
@@ -624,8 +630,8 @@ margin_top = 3.0
 margin_right = 848.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
@@ -635,7 +641,7 @@ margin_right = 1720.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
+custom_styles/panel = ExtResource( 8 )
 
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer/HBoxAnswers2/Panel2"]
 anchor_right = 1.0
@@ -644,7 +650,7 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-custom_styles/panel = ExtResource( 8 )
+custom_styles/panel = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxAnswers2/Panel2/Panel"]
 editor/display_folded = true
@@ -659,8 +665,8 @@ rect_min_size = Vector2( 110, 106 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
@@ -678,8 +684,8 @@ margin_top = 3.0
 margin_right = 422.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 
 [node name="LabelGamepadHint" type="Label" parent="Panel/VBoxContainer/HBoxAnswers2/Panel2/Panel/VBoxContainer/HBoxContainer"]
@@ -689,8 +695,8 @@ margin_top = 3.0
 margin_right = 350.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "[RT]"
 align = 1
@@ -701,8 +707,8 @@ margin_top = 3.0
 margin_right = 848.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 12 )
+custom_styles/normal = ExtResource( 11 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 2
 
@@ -758,10 +764,10 @@ valign = 1
 autowrap = true
 
 [node name="PlayerWrong" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
+stream = ExtResource( 14 )
 
 [node name="PlayerCorrect" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 15 )
 
 [node name="AnswerAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/modulate = SubResource( 4 )

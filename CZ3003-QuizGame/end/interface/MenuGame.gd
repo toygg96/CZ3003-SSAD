@@ -56,3 +56,7 @@ func _on_Signout_pressed():
 func _on_Upgrade_Character_pressed():
 	Firebase.upgrade_character = true
 	return get_tree().change_scene("res://interface/profile/UserProfile.tscn")
+
+
+func _on_Leaderboards_pressed():
+	return get_tree().change_scene("res://interface/leaderboard/leaderboard.tscn")

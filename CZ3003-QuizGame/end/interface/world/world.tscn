@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/world/world.gd" type="Script" id=1]
-[ext_resource path="res://interface/Title.tscn" type="PackedScene" id=2]
-[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=2]
+[ext_resource path="res://interface/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=4]
 
 [node name="world" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
 
 [node name="Container" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -18,7 +24,7 @@ margin_right = -25.0
 margin_bottom = -25.0
 custom_constants/separation = 50
 
-[node name="Title" parent="Container" instance=ExtResource( 2 )]
+[node name="Title" parent="Container" instance=ExtResource( 3 )]
 text = "CHOOSE WORLD"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
@@ -36,35 +42,35 @@ alignment = 1
 margin_left = 83.0
 margin_right = 409.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "WORLD 1"
 
 [node name="World2" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
 margin_left = 413.0
 margin_right = 751.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "WORLD 2"
 
 [node name="World3" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
 margin_left = 755.0
 margin_right = 1094.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "WORLD 3"
 
 [node name="World4" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
 margin_left = 1098.0
 margin_right = 1443.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "WORLD 4"
 
 [node name="World5" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
 margin_left = 1447.0
 margin_right = 1786.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "WORLD 5"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -77,7 +83,7 @@ alignment = 1
 margin_left = 638.0
 margin_right = 1232.0
 margin_bottom = 85.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "CUSTOM WORLD"
 
 [node name="BackButton" type="Button" parent="Container/VBoxContainer2"]
@@ -86,7 +92,7 @@ margin_top = 200.0
 margin_right = 1038.0
 margin_bottom = 285.0
 size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "BACK"
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/World1" to="." method="_on_World1_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/World2" to="." method="_on_World2_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://interface/MenuGame.gd" type="Script" id=2]
-[ext_resource path="res://styles/header2_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=5]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=3]
+[ext_resource path="res://styles/header2_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=6]
 
 [node name="MenuGame" type="TextureRect"]
 anchor_right = 1.0
@@ -12,6 +13,11 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
 
 [node name="VBoxMain" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -54,7 +60,7 @@ margin_top = 12.0
 margin_right = 150.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 150, 32 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 
 [node name="HBoxVersion" type="HBoxContainer" parent="VBoxMain/HBoxLanguage"]
 margin_left = 1051.0
@@ -89,7 +95,7 @@ alignment = 1
 margin_left = 173.0
 margin_right = 1747.0
 margin_bottom = 114.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "SOFTARE ENGINEERING QUIZ GAME"
 
 [node name="VBoxGreeting" type="VBoxContainer" parent="VBoxMain"]
@@ -101,7 +107,7 @@ alignment = 1
 [node name="LabelName" type="Label" parent="VBoxMain/VBoxGreeting"]
 margin_right = 1920.0
 margin_bottom = 79.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 align = 1
 
 [node name="LabelStatsSingle" type="Label" parent="VBoxMain/VBoxGreeting"]
@@ -162,7 +168,7 @@ margin_top = 156.0
 margin_right = 349.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 150, 48 )
-text = "LEADERBOARDS"
+text = "LEADERBOARD"
 
 [node name="Stats" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 208.0
@@ -203,6 +209,7 @@ text = "QUIT"
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Upgrade Character" to="." method="_on_Upgrade_Character_pressed"]
+[connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Leaderboards" to="." method="_on_Leaderboards_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Signout" to="." method="_on_Signout_pressed"]
 [connection signal="pressed" from="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
