@@ -12,11 +12,11 @@ func _on_World1_pressed():
 	Firebase.worldSelected = "World1"
 	return get_tree().change_scene("res://interface/difficulty/difficulty.tscn")
 
-func _on_World3_pressed():
+func _on_World2_pressed():
 	Firebase.worldSelected = "World2"
 	return get_tree().change_scene("res://interface/difficulty/difficulty.tscn")
 
-func _on_World2_pressed():
+func _on_World3_pressed():
 	Firebase.worldSelected = "World3"
 	return get_tree().change_scene("res://interface/difficulty/difficulty.tscn")
 

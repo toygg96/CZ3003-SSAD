@@ -106,7 +106,6 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="PanelLives" type="Control" parent="Panel/VBoxContainer"]
-editor/display_folded = true
 margin_right = 1720.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 100 )
@@ -131,10 +130,10 @@ margin_right = 256.0
 margin_bottom = 38.0
 
 [node name="HBoxLives" type="HBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives"]
-editor/display_folded = true
-margin_top = 42.0
-margin_right = 256.0
-margin_bottom = 90.0
+margin_left = 52.0
+margin_top = 20.0
+margin_right = 308.0
+margin_bottom = 68.0
 
 [node name="Life1" type="Panel" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives"]
 margin_right = 48.0
@@ -171,22 +170,21 @@ rect_min_size = Vector2( 48, 48 )
 custom_styles/panel = ExtResource( 4 )
 
 [node name="VBoxInfo" type="VBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives"]
-editor/display_folded = true
-margin_left = 260.0
-margin_right = 1446.0
+margin_right = 1710.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxScore" type="HBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo"]
-margin_right = 1186.0
+margin_left = 500.0
+margin_right = 1710.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="PlayerScoreLabel" type="Label" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore"]
-margin_right = 560.0
+margin_right = 1096.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -197,16 +195,16 @@ valign = 1
 autowrap = true
 
 [node name="HBoxQuit" type="HBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore"]
-margin_left = 564.0
-margin_right = 620.0
+margin_left = 1100.0
+margin_right = 1210.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxQuit" type="VBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/HBoxQuit"]
-margin_left = 4.0
-margin_right = 52.0
+margin_left = 31.0
+margin_right = 79.0
 margin_bottom = 58.0
 alignment = 1
 
@@ -219,9 +217,10 @@ texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 7 )
 
 [node name="OpponentScoreLabel" type="Label" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore"]
-margin_left = 624.0
-margin_right = 1186.0
-margin_bottom = 58.0
+visible = false
+margin_left = 760.0
+margin_right = 1446.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 10.0
@@ -230,26 +229,27 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="HBoxTimer" type="HBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo"]
+[node name="AP" type="HBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo"]
 margin_top = 62.0
-margin_right = 1186.0
+margin_right = 1710.0
 margin_bottom = 100.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 alignment = 1
 
-[node name="LabelReward" type="Label" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxTimer"]
+[node name="LabelReward" type="Label" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/AP"]
 margin_right = 50.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 50, 0 )
 align = 1
 valign = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxTimer"]
-self_modulate = Color( 0, 1, 0, 1 )
+[node name="APBar" type="ProgressBar" parent="Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/AP"]
+self_modulate = Color( 0, 0.929412, 1, 1 )
+light_mask = 0
 margin_left = 54.0
 margin_top = 14.0
-margin_right = 1186.0
+margin_right = 754.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
@@ -262,6 +262,7 @@ percent_visible = false
 
 [node name="VBoxOpponentLives" type="VBoxContainer" parent="Panel/VBoxContainer/PanelLives/HBoxLives"]
 editor/display_folded = true
+visible = false
 margin_left = 1450.0
 margin_right = 1706.0
 margin_bottom = 100.0

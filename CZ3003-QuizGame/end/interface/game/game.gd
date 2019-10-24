@@ -2,9 +2,9 @@ extends TextureRect
 
 onready var http : HTTPRequest = $HTTPRequest
 onready var player_name_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/LabelPlayerName")
-onready var opponent_lives_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives")
-onready var opponent_name_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/LabelOpponentName")
-onready var category_node = get_node("Panel/VBoxContainer/HBoxConfirm/Panel/category")
+#onready var opponent_lives_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives")
+#onready var opponent_name_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/LabelOpponentName")
+#onready var category_node = get_node("Panel/VBoxContainer/HBoxConfirm/Panel/category")
 onready var quiz_number_node = get_node("Panel/VBoxContainer/HBoxConfirm/Panel2/quiz_number")
 onready var text_panel_node = get_node("Panel/VBoxContainer/HBoxQuestion/TextPanel")
 onready var inner_text_panel_node = text_panel_node.get_node("Panel")
@@ -17,10 +17,9 @@ onready var quit_button = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBo
 onready var player_wrong = get_node("PlayerWrong")
 onready var player_correct = get_node("PlayerCorrect")
 onready var score_label_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/PlayerScoreLabel")
-onready var opponent_score_label_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/OpponentScoreLabel")
-onready var timer_progress_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxTimer")
-onready var label_reward_node = timer_progress_node.get_node("LabelReward")
-onready var timer_progress_bar_node = timer_progress_node.get_node("ProgressBar")
+#onready var opponent_score_label_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/OpponentScoreLabel")
+onready var AP_bar = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/AP/APBar")
+#onready var label_reward_node = timer_progress_node.get_node("LabelReward")
 onready var answer_panel_1_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel")
 onready var answer_panel_2_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel2")
 onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel")
@@ -43,6 +42,11 @@ answer_panel_3_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint
 answer_panel_4_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint")
 ]
 
+
+var lifes_idx = 5
+var AP_idx = 10
+var score = 0
+var ACost = 1
 onready var life_nodes = [
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life1"),
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life2"),
@@ -50,20 +54,24 @@ get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Lif
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life4"),
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life5")
 ]
-var lifes_idx = 5
-var score = 0
 
-onready var opponent_life_nodes = [
-get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life1"),
-get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life2"),
-get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life3"),
-get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life4"),
-get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life5")
-]
-var opponent_lifes_idx = 0
-var opponent_score = 0
+
+
+
+#onready var opponent_life_nodes = [
+#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life1"),
+#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life2"),
+#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life3"),
+#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life4"),
+#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life5")
+#]
+#var opponent_lifes_idx = 0
+#var opponent_score = 0
 
 onready var life_empty = load("res://styles/life_empty.tres")
+onready var life_full = load("res://styles/life_full.tres")
+onready var life_dfull = load("res://styles/life_dfull.tres")
+onready var life_tfull = load("res://styles/life_tfull.tres")
 onready var answer_selected = load("res://styles/dark_answer_selected.tres") 
 onready var answer_inner = load("res://styles/dark_inner.tres") 
 onready var answer_correct = load("res://styles/answer_correct.tres")
@@ -108,12 +116,58 @@ var question := {
 } setget set_question
 
 func _ready():
+	_generate_player_life(lifes_idx)
+	AP_bar.max_value = AP_idx
+	AP_bar.value = AP_idx
 	print(Firebase.user_info.id);
 	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
 
 func _on_ButtonQuit_pressed():
 	get_tree().change_scene("res://interface/MenuGame.tscn")
+
+func _generate_player_life_all(t: int)->void:
+	if t == 1:
+		for i in range(5):
+			life_nodes[i].set("custom_styles/panel", life_full)
+		return
+	elif t == 2:
+		for i in range(5):
+			life_nodes[i].set("custom_styles/panel", life_dfull)
+		return
+	for i in range(5):
+		life_nodes[i].set("custom_styles/panel", life_tfull)
+	return
 	
+func _generate_player_life(life: int)->void:
+	var lchange = life%5
+		
+	if life <= 5:
+		if lchange == 0:
+			_generate_player_life_all(1)
+			return
+		for i in range(5-lchange):
+			life_nodes[lchange].set("custom_styles/panel", life_empty)
+			lchange+=1
+		return
+		
+	elif life <= 10:
+		if lchange == 0:
+			_generate_player_life_all(2)
+			return
+		for i in range(lchange):
+			life_nodes[lchange-1].set("custom_styles/panel", life_dfull)
+			lchange-=1
+		return
+	for i in range(5):
+		if lchange == 0:
+			_generate_player_life_all(3)
+			return
+		_generate_player_life_all(2)
+		for i in range(lchange):
+			life_nodes[lchange-1].set("custom_styles/panel", life_tfull)
+			return	 
+		
+
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
 	print(result_body)
@@ -195,6 +249,7 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
+		_consume_AP(AP_idx)
 	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
 		highlight_answer(answer_nodes[num-1],answer_correct)
@@ -203,13 +258,37 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
+		_consume_AP(AP_idx)
 	else:
 		player_wrong.play()
 		highlight_answer(answer_nodes[num-1],answer_error)
 		var i = int(question.correctAns.stringValue[6])
 		highlight_answer(answer_nodes[i-1],answer_correct)
 		disableInput = true
+		_damage(lifes_idx)
+		lifes_idx-=1
+		_consume_AP(AP_idx)
+		if lifes_idx<=0:
+			_on_ButtonQuit_pressed()
 		next_button.show()	
+	
+func _consume_AP(cAP: int)->void:
+	if cAP >= ACost:
+		AP_idx -= ACost
+		AP_bar.value = AP_idx
+		return
+	_on_ButtonQuit_pressed()
+	
+func _damage(life: int)->void:
+	var dchange=life%5
+	if life >= 11:
+		life_nodes[dchange-1].set("custom_styles/panel", life_dfull)
+		return
+	elif life >= 6:
+		life_nodes[dchange-1].set("custom_styles/panel", life_full)
+		return
+	life_nodes[dchange-1].set("custom_styles/panel", life_empty)
+	return
 	
 func clear_answers(num):
 	highlight_answer(answer_nodes[num], answer_inner)
@@ -220,6 +299,9 @@ func clear_questionsAnswers():
 		answer_nodes[i].set_text("")
 
 func _on_Next_pressed():
+	if AP_idx == 0:
+		_on_ButtonQuit_pressed()
+	
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
 	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
