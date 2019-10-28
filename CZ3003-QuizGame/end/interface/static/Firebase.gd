@@ -80,7 +80,6 @@ func delete_document(path: String, http: HTTPRequest) -> void:
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_DELETE)
 	
 func generate_fb_link(http: HTTPRequest, mode: String) -> void:
-	print("Does this get called?!?!?!")
 	var url
 	if (mode == "created"):
 		url = FB_URL + "A%20new%20assignment%20has%20been%20" + mode + "%20by%20Teacher.%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Aapp%3A%2F%2FSEQuizGame"
