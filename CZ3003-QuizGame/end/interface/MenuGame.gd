@@ -6,8 +6,14 @@ onready var createLevelBtn = $VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/Crea
 var profile := {
 	"nickname": {},
 	"character_class": {},
-	"strength": {},
-	"intelligence": {},
+	"HP": {},
+	"AP": {},
+	"W1Score": {},
+	"W2Score": {},
+	"W3Score": {},
+	"W4Score": {},
+	"W5Score": {},
+	"currency": {},
 	"overallScore": {}
 } setget set_profile
 
@@ -56,7 +62,6 @@ func _on_Signout_pressed():
 func _on_Upgrade_Character_pressed():
 	Firebase.upgrade_character = true
 	return get_tree().change_scene("res://interface/profile/UserProfile.tscn")
-
 
 func _on_Leaderboards_pressed():
 	return get_tree().change_scene("res://interface/leaderboard/leaderboard.tscn")
