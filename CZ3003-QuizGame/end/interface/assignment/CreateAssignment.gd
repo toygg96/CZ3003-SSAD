@@ -2,6 +2,7 @@ extends Node
 
 # Declare member variables here. Examples:
 onready var http : HTTPRequest = $HTTPRequest
+onready var http2 : HTTPRequest = $HTTPRequest
 onready var title = $Container/Title
 onready var question : Label = $Container/VBoxContainer2/Question/LineEdit
 onready var answer1 : Label = $Container/VBoxContainer2/Answer1/LineEdit
@@ -9,13 +10,10 @@ onready var notification : Label = $Container/Notification
 onready var answer2 : Label = $Container/VBoxContainer2/Answer2/LineEdit
 onready var answer3 : Label = $Container/VBoxContainer2/Answer3/LineEdit
 onready var answer4 : Label = $Container/VBoxContainer2/Answer4/LineEdit
-onready var difficultyDropdown : OptionButton  = $Container/VBoxContainer2/Selections/DifficultyDropdown
-onready var questionNumDropdown : OptionButton  = $Container/VBoxContainer2/Selections/QuestionNumDropdown
 onready var dropdown : OptionButton  = $Container/VBoxContainer2/HBoxContainer2/Dropdown
 onready var itemSelected
 onready var questionNumSelected
 onready var difficultySelected = "NULL"
-
 
 var new_question := false
 var information_sent := false
@@ -30,9 +28,8 @@ var questionObj := {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Firebase.get_document("custom/%s" % Firebase.username, http)
 	add_items()
-	add_difficultyItems()
-	add_questionItems()
 	if(Firebase.username == "teacher"):
 		title.set_text("Create Assignment")
 	else:
@@ -43,7 +40,7 @@ func _on_Button_pressed():
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(response_code)
+	print("response  code[EXISTING RECORD]: " , response_code)
 	match response_code:
 		404:
 			notification.text = "No record found"
@@ -60,12 +57,20 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			if information_sent:
 				notification.text = "Information saved successfully"
 				information_sent = false
-
+	
 			else :
 				notification.text = "Information retrieved successfully"			
 				self.questionObj = result_body.fields	
 			new_question = false
-
+		
+func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
+	print("response  code[NEW RECORD]: " , response_code)
+	match response_code:
+		404:
+			notification.text = "Post to FB failed"
+		200:
+			notification.text = "Successfully posted to FB"
+			print("WTF")
 
 func _on_ConfirmButton_pressed() -> void:
 	if question.text.empty() or answer1.text.empty() or answer2.text.empty() or answer3.text.empty() or answer4.text.empty() or itemSelected == "NULL":
@@ -79,10 +84,15 @@ func _on_ConfirmButton_pressed() -> void:
 	questionObj.correctAns = { "stringValue": itemSelected } 
 	match new_question:
 		true:
-			print(Firebase.user_info.id)
-			Firebase.save_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/?documentId=" + questionNumSelected, questionObj, http)
+			print(Firebase.username)
+			Firebase.save_document("custom?documentId=%s" % Firebase.username, questionObj, http)
+			yield(get_tree().create_timer(2.0), "timeout")
+			Firebase.generate_fb_link(http2,"created")
 		false:
-			Firebase.update_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/" + questionNumSelected, questionObj, http)
+			print(questionObj.correctAns)
+			Firebase.update_document("custom/%s" % Firebase.username, questionObj, http)
+			yield(get_tree().create_timer(2.0), "timeout")
+			Firebase.generate_fb_link(http2,"updated")
 	information_sent = true
 
 
@@ -110,23 +120,6 @@ func add_items():
 	 dropdown.add_item("Answer2")
 	 dropdown.add_item("Answer3")
 	 dropdown.add_item("Answer4")
-	 
-func add_difficultyItems():
-	 difficultyDropdown.add_item("NULL")
-	 difficultyDropdown.add_separator()
-	 difficultyDropdown.add_item("EASY")
-	 difficultyDropdown.add_item("DIFFICULT")
-	 difficultyDropdown.add_item("LUNATIC")
-	
- 
-func add_questionItems():
-	 questionNumDropdown.add_item("QN")
-	 questionNumDropdown.add_separator()
-	 questionNumDropdown.add_item("Q1")
-	 questionNumDropdown.add_item("Q2")
-	 questionNumDropdown.add_item("Q3")
-	 questionNumDropdown.add_item("Q4")
-	 questionNumDropdown.add_item("Q5")
 	
 func clear_all():
 	dropdown.clear()
@@ -138,14 +131,4 @@ func clear_all():
 
 func _on_Dropdown_item_selected(ID):
 	itemSelected = dropdown.get_item_text(ID)
-
-func _on_DifficultyDropdown_item_selected(ID):
-	difficultySelected = difficultyDropdown.get_item_text(ID)
-	
-func _on_QuestionNumDropdown_item_selected(ID):
-	questionNumSelected = questionNumDropdown.get_item_text(ID)
-	if(difficultySelected != "NULL"):
-		Firebase.get_document("worlds/%s" % Firebase.user_info.id + "/World6/" + difficultySelected + "/qns/" + questionNumSelected , http)
-	else :
-		notification.text = "Please choose a difficulty"
 
