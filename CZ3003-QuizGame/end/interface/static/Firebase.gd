@@ -6,6 +6,7 @@ const PROJECT_ID := "ssadquiz"
 const REGISTER_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=%s" % API_KEY
 const LOGIN_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=%s" % API_KEY
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
+const FB_URL := "https://graph.facebook.com/v4.0/108881370543869/feed?&access_token=EAAF6NXFLmHoBAEqbVPgGMiXvbKVDZC0ZCZCYZAlMPrVxk8ZB1dxMhvLKpLqU04KM9ZBB3SHQOnR6KYwsqrqu14mn7C1jXTPiDYDzaYrxdxpmLZBmrJZBoXWDk6U02LGvysH7BZCbpPhgcLPj4Ue3ZBCPlnqElR1OqYI7K93NvdsMoZAhZBJmtNLWv7EjBuhLF7btl7MZD&message="
 onready var profile := {
 	"nickname": {},
 	"character_class": {},
@@ -77,5 +78,13 @@ func update_document(path: String, fields: Dictionary, http: HTTPRequest) -> voi
 func delete_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_DELETE)
+	
+func generate_fb_link(http: HTTPRequest, mode: String) -> void:
+	var url
+	if (mode == "created"):
+		url = FB_URL + "A%20new%20assignment%20has%20been%20" + mode + "%20by%20Teacher.%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Aapp%3A%2F%2FSEQuizGame"
+	elif (mode == "updated"):
+		url = FB_URL + "An%20existing%20assignment%20has%20been%20" + mode + "%20by%20Teacher.%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Aapp%3A%2F%2FSEQuizGame"
+	http.request(url,["Content-Type: application/json"], true, HTTPClient.METHOD_POST,"")
 	
 

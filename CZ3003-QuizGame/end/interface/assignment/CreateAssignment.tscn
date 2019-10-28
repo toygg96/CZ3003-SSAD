@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/assignment/CreateAssignment.gd" type="Script" id=1]
 [ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=2]
 [ext_resource path="res://interface/Title.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/fonts/montserrat_eb_48.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/images/BACKGROUND.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/facebook.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/twitter.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/SOCIALMEDIA.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/close.png" type="Texture" id=9]
 
 [node name="CreateAssignment" type="Control"]
 anchor_right = 1.0
@@ -36,53 +41,14 @@ text = "CREATE ASSIGNMENT"
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1870.0
-margin_bottom = 879.0
+margin_bottom = 798.0
 custom_constants/separation = 15
-
-[node name="Selections" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_left = 203.0
-margin_right = 1667.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 1000, 0 )
-size_flags_horizontal = 4
-custom_constants/separation = 25
-alignment = 1
-
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Selections"]
-margin_top = 3.0
-margin_right = 668.0
-margin_bottom = 63.0
-custom_fonts/font = ExtResource( 4 )
-text = "Select Question Difficulty:"
-align = 1
-
-[node name="DifficultyDropdown" type="OptionButton" parent="Container/VBoxContainer2/Selections"]
-margin_left = 693.0
-margin_right = 734.0
-margin_bottom = 66.0
-custom_fonts/font = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="Container/VBoxContainer2/Selections"]
-margin_left = 759.0
-margin_top = 3.0
-margin_right = 1398.0
-margin_bottom = 63.0
-custom_fonts/font = ExtResource( 4 )
-text = "Select Question Number:"
-align = 1
-
-[node name="QuestionNumDropdown" type="OptionButton" parent="Container/VBoxContainer2/Selections"]
-margin_left = 1423.0
-margin_right = 1464.0
-margin_bottom = 66.0
-custom_fonts/font = ExtResource( 4 )
 
 [node name="Question" type="HBoxContainer" parent="Container/VBoxContainer2"]
 editor/display_folded = true
 margin_left = 435.0
-margin_top = 81.0
 margin_right = 1435.0
-margin_bottom = 151.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -107,9 +73,9 @@ caret_blink = true
 
 [node name="Answer1" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 435.0
-margin_top = 166.0
+margin_top = 85.0
 margin_right = 1435.0
-margin_bottom = 236.0
+margin_bottom = 155.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -134,9 +100,9 @@ caret_blink = true
 
 [node name="Answer2" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 435.0
-margin_top = 251.0
+margin_top = 170.0
 margin_right = 1435.0
-margin_bottom = 321.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -162,9 +128,9 @@ caret_blink = true
 [node name="Answer3" type="HBoxContainer" parent="Container/VBoxContainer2"]
 editor/display_folded = true
 margin_left = 435.0
-margin_top = 336.0
+margin_top = 255.0
 margin_right = 1435.0
-margin_bottom = 406.0
+margin_bottom = 325.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -189,9 +155,9 @@ caret_blink = true
 
 [node name="Answer4" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 435.0
-margin_top = 421.0
+margin_top = 340.0
 margin_right = 1435.0
-margin_bottom = 491.0
+margin_bottom = 410.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -215,10 +181,9 @@ custom_fonts/font = ExtResource( 4 )
 caret_blink = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2"]
-editor/display_folded = true
-margin_top = 506.0
+margin_top = 425.0
 margin_right = 1870.0
-margin_bottom = 572.0
+margin_bottom = 491.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Container/VBoxContainer2/HBoxContainer2"]
@@ -237,9 +202,9 @@ custom_fonts/font = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
 editor/display_folded = true
-margin_top = 587.0
+margin_top = 506.0
 margin_right = 1870.0
-margin_bottom = 672.0
+margin_bottom = 591.0
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
@@ -271,18 +236,62 @@ text = "CONFIRM"
 align = 2
 
 [node name="Notification" type="Label" parent="Container"]
-margin_top = 929.0
+margin_top = 848.0
 margin_right = 1870.0
-margin_bottom = 989.0
+margin_bottom = 908.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
 align = 1
 autowrap = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-[connection signal="item_selected" from="Container/VBoxContainer2/Selections/DifficultyDropdown" to="." method="_on_DifficultyDropdown_item_selected"]
-[connection signal="item_selected" from="Container/VBoxContainer2/Selections/QuestionNumDropdown" to="." method="_on_QuestionNumDropdown_item_selected"]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="socialMediaPopup" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Sprite" type="Sprite" parent="socialMediaPopup"]
+position = Vector2( 977.591, 572.124 )
+scale = Vector2( 1.41468, 1.13091 )
+texture = ExtResource( 5 )
+
+[node name="fbBtn" type="TextureButton" parent="socialMediaPopup"]
+margin_left = 983.505
+margin_top = 280.364
+margin_right = 1495.5
+margin_bottom = 792.364
+texture_normal = ExtResource( 6 )
+
+[node name="twitterBtn" type="TextureButton" parent="socialMediaPopup"]
+margin_left = 455.926
+margin_top = 282.836
+margin_right = 967.926
+margin_bottom = 794.836
+texture_normal = ExtResource( 7 )
+
+[node name="background" type="TextureRect" parent="socialMediaPopup"]
+margin_left = 380.0
+margin_top = 150.0
+margin_right = 200.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.24351, 1.94173 )
+texture = ExtResource( 8 )
+
+[node name="closeBtn" type="TextureButton" parent="socialMediaPopup"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 1576.0
+margin_top = 148.827
+margin_right = 2088.0
+margin_bottom = 660.827
+rect_scale = Vector2( 0.240481, 0.217574 )
+texture_normal = ExtResource( 9 )
 [connection signal="item_selected" from="Container/VBoxContainer2/HBoxContainer2/Dropdown" to="." method="_on_Dropdown_item_selected"]
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer2/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_HTTPRequest2_request_completed"]
+[connection signal="pressed" from="socialMediaPopup/fbBtn" to="." method="_on_fbBtn_pressed"]
+[connection signal="pressed" from="socialMediaPopup/closeBtn" to="." method="_on_closeBtn_pressed"]
