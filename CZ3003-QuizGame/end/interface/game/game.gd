@@ -2,9 +2,6 @@ extends TextureRect
 
 onready var http : HTTPRequest = $HTTPRequest
 onready var player_name_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/LabelPlayerName")
-#onready var opponent_lives_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives")
-#onready var opponent_name_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/LabelOpponentName")
-#onready var category_node = get_node("Panel/VBoxContainer/HBoxConfirm/Panel/category")
 onready var quiz_number_node = get_node("Panel/VBoxContainer/HBoxConfirm/Panel2/quiz_number")
 onready var text_panel_node = get_node("Panel/VBoxContainer/HBoxQuestion/TextPanel")
 onready var inner_text_panel_node = text_panel_node.get_node("Panel")
@@ -17,9 +14,7 @@ onready var quit_button = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBo
 onready var player_wrong = get_node("PlayerWrong")
 onready var player_correct = get_node("PlayerCorrect")
 onready var score_label_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/PlayerScoreLabel")
-#onready var opponent_score_label_node = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/HBoxScore/OpponentScoreLabel")
 onready var AP_bar = get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxInfo/AP/APBar")
-#onready var label_reward_node = timer_progress_node.get_node("LabelReward")
 onready var answer_panel_1_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel")
 onready var answer_panel_2_node = get_node("Panel/VBoxContainer/HBoxAnswers1/Panel2")
 onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel")
@@ -41,12 +36,25 @@ answer_panel_2_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint
 answer_panel_3_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint"),
 answer_panel_4_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint")
 ]
+onready var lifes_idx = 0;
+onready var AP_idx = 0;
+var profile := {
+	"nickname": {},
+	"character_class": {},
+	"HP": {},
+	"AP": {},
+	"W1Score": {},
+	"W2Score": {},
+	"W3Score": {},
+	"W4Score": {},
+	"W5Score": {},
+	"overallScore": {}
+} setget set_profile
 
-
-var lifes_idx = 5
-var AP_idx = 10
+#var lifes_idx = int(Firebase.profile.HP.integerValue)
+#var AP_idx = Firebase.get_document("users/%s" %Firebase.username,http).AP.integerValue
 var score = 0
-var ACost = 1
+var ACost = int(Firebase.worldSelected)
 onready var life_nodes = [
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life1"),
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life2"),
@@ -54,19 +62,6 @@ get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Lif
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life4"),
 get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxPlayerLives/HBoxLives/Life5")
 ]
-
-
-
-
-#onready var opponent_life_nodes = [
-#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life1"),
-#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life2"),
-#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life3"),
-#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life4"),
-#get_node("Panel/VBoxContainer/PanelLives/HBoxLives/VBoxOpponentLives/HBoxLives/Life5")
-#]
-#var opponent_lifes_idx = 0
-#var opponent_score = 0
 
 onready var life_empty = load("res://styles/life_empty.tres")
 onready var life_full = load("res://styles/life_full.tres")
@@ -88,20 +83,13 @@ var session_id = 0
 var quizzes = []
 var current_quiz_idx = 0
 var current_quiz_question = {}
-var opponent_ready = false
 var player_id = -1
-var opponent_player_id = -1
 var answer_accepted = false
-var opponent_answer_present = false
-var opponent_answer_accepted = false
 var answer_ids = [0, 0, 0, 0]
 var answer_selection = [false, false, false, false]
-var opponent_answer_selection = [false, false, false, false] # will be updated in has_opponent_answer()
 var correct_answers = [false, false, false, false]
-var cpu_opponent_progress_threshold = 0
 var answer_result_timeout = 0
 var allow_next = true
-var opponent_lost = false
 var disableInput = false
 
 var new_question = false
@@ -117,6 +105,7 @@ var question := {
 
 func _ready():
 	_generate_player_life(lifes_idx)
+	fetchExistingProfiel()
 	AP_bar.max_value = AP_idx
 	AP_bar.value = AP_idx
 	print(Firebase.user_info.id);
@@ -142,8 +131,8 @@ func _generate_player_life(life: int)->void:
 	var lchange = life%5
 		
 	if life <= 5:
+		_generate_player_life_all(1)
 		if lchange == 0:
-			_generate_player_life_all(1)
 			return
 		for i in range(5-lchange):
 			life_nodes[lchange].set("custom_styles/panel", life_empty)
@@ -151,21 +140,20 @@ func _generate_player_life(life: int)->void:
 		return
 		
 	elif life <= 10:
+		_generate_player_life_all(2)
 		if lchange == 0:
-			_generate_player_life_all(2)
 			return
 		for i in range(lchange):
-			life_nodes[lchange-1].set("custom_styles/panel", life_dfull)
+			life_nodes[lchange-1].set("custom_styles/panel", life_full)
 			lchange-=1
 		return
 	for i in range(5):
+		_generate_player_life_all(3)
 		if lchange == 0:
-			_generate_player_life_all(3)
 			return
-		_generate_player_life_all(2)
 		for i in range(lchange):
-			life_nodes[lchange-1].set("custom_styles/panel", life_tfull)
-			return	 
+			life_nodes[lchange-1].set("custom_styles/panel", life_dfull)
+		return	 
 		
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
@@ -309,3 +297,18 @@ func _on_Next_pressed():
 	next_button.hide()
 	for i in [0,1,2,3]:
 		clear_answers(i)
+
+func set_profile(value: Dictionary) -> void:
+	profile = value
+	#nickname.text = profile.nickname.stringValue
+	#character_class.text = profile.character_class.stringValue
+	lifes_idx = int(profile.HP.integerValue)
+	AP_idx = int(profile.AP.integerValue)
+	#overallScore.text = str(profile.overallScore.integerValue)
+
+func fetchExistingProfiel():
+	#nickname.text = Firebase.profile.nickname.stringValue
+	#character_class.text = Firebase.profile.character_class.stringValue
+	lifes_idx = int(Firebase.profile.HP.integerValue)
+	AP_idx = int(Firebase.profile.AP.integerValue)
+	#overallScore.text = str(Firebase.profile.overallScore.integerValue)
