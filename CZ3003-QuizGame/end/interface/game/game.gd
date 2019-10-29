@@ -336,8 +336,8 @@ func _updateProfile():
 		print(Firebase.profile)
 	information_sent = true
 
-func set_quiz(question):
-	quizzes = question
+func set_quiz(question_set):
+	quizzes = question_set
 
 func get_quiz():
 	return quizzes
