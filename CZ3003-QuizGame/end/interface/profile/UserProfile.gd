@@ -14,8 +14,6 @@ onready var OAP = 0
 onready var upgradeP = 0
 onready var overallScore : Label = $Container/VBoxContainer2/Score/Label2
 
-var test_profile = {}
-
 var information_sent := false
 var profile := {
 	"nickname": {},
