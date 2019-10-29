@@ -10,10 +10,16 @@ const FB_URL := "https://graph.facebook.com/v4.0/108881370543869/feed?&access_to
 onready var profile := {
 	"nickname": {},
 	"character_class": {},
-	"strength": {},
-	"intelligence": {},
+	"HP": {},
+	"AP": {},
+	"W1Score": {},
+	"W2Score": {},
+	"W3Score": {},
+	"W4Score": {},
+	"W5Score": {},
+	"upPoints": {},
 	"overallScore": {}
-} 
+}
 var new_character = false
 var upgrade_character = false
 var user_info := {}

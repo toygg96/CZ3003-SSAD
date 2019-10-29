@@ -13,7 +13,7 @@ var profile := {
 	"W3Score": {},
 	"W4Score": {},
 	"W5Score": {},
-	"currency": {},
+	"upPoints": {},
 	"overallScore": {}
 } setget set_profile
 

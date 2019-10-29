@@ -52,6 +52,7 @@ var profile := {
 	"W3Score": {},
 	"W4Score": {},
 	"W5Score": {},
+	"upPoints": {},
 	"overallScore": {}
 } setget set_profile
 
@@ -332,4 +333,5 @@ func _updateProfile():
 		Firebase.profile.overallScore = { "integerValue": Oscore }
 		Firebase.profile.upPoints = { "integerValue": UPoints }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
+		print(Firebase.profile)
 	information_sent = true
