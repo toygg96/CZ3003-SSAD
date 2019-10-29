@@ -88,7 +88,7 @@ func _on_ConfirmButton_pressed() -> void:
 		true:
 			print(Firebase.username)
 			information_sent = true
-			Firebase.save_document("custom?documentId=%s" % Firebase.username, questionObj, http)
+			Firebase.save_document("custom/%s" % Firebase.username + "/qns/?documentId=%s" % questionNumSelected, questionObj, http)
 			#Firebase.generate_fb_link(http2,"created")
 			yield(get_tree().create_timer(1.5), "timeout")
 			socialMediaMode = "created"	
@@ -96,7 +96,7 @@ func _on_ConfirmButton_pressed() -> void:
 		false:
 			print(questionObj.correctAns)
 			information_sent = true
-			Firebase.update_document("custom/%s" % Firebase.username, questionObj, http)
+			Firebase.update_document("custom/%s" % Firebase.username + "/qns/%s" % questionNumSelected , questionObj, http)
 			yield(get_tree().create_timer(1.5), "timeout")
 			#Firebase.generate_fb_link(http2,"updated")
 			socialMediaMode = "updated"
@@ -141,7 +141,7 @@ func _on_Dropdown_item_selected(ID):
 
 func _on_fbBtn_pressed():
 	Firebase.generate_fb_link(http2, socialMediaMode)
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(1.8), "timeout")
 	socialMediaPopup.hide()
 
 func _on_closeBtn_pressed():
