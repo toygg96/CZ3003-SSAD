@@ -14,6 +14,8 @@ onready var OAP = 0
 onready var upgradeP = 0
 onready var overallScore : Label = $Container/VBoxContainer2/Score/Label2
 
+var test_profile = {}
+
 var information_sent := false
 var profile := {
 	"nickname": {},
@@ -123,28 +125,3 @@ func fetchExistingProfiel():
 
 func _on_Button_pressed():
 	return get_tree().change_scene("res://interface/MenuGame.tscn")
-
-func _on_HP_Slider_value_changed(value):
-	if HP.value > OHP:
-		if upgradeP < 500:
-			HP.value = OHP
-			return
-		else:
-			upgradeP -= 500
-			return
-	elif HP.value < OHP:
-		upgradeP += 500	
-	
-
-func _on_AP_Slider_value_changed(value):
-	if AP.value > OAP:
-		if upgradeP < 1000:
-			AP.value = OAP
-			return
-		else:
-			upgradeP -= 1000
-			profile.AP = { "integerValue": AP.value}
-			return
-	elif AP.value < OAP:
-		upgradeP += 1000
-	
