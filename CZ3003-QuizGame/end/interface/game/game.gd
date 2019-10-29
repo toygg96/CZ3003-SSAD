@@ -335,3 +335,9 @@ func _updateProfile():
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
 	information_sent = true
+
+func set_quiz(question):
+	quizzes = question
+
+func get_quiz():
+	return quizzes

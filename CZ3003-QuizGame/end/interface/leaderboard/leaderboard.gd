@@ -52,3 +52,9 @@ func bubbleSortRankings():
 
 func _on_back_pressed():
 	return get_tree().change_scene("res://interface/MenuGame.tscn")
+
+func set_user(user_target):
+	user = user_target
+
+func get_user():
+	return user

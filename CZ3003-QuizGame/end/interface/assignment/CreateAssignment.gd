@@ -145,14 +145,3 @@ func _on_fbBtn_pressed():
 
 func _on_closeBtn_pressed():
 	socialMediaPopup.hide()
-	
-func set_test_question(value):
-	test_question.question = value.question
-	test_question.answer1 = value.answer1
-	test_question.answer2 = value.answer2
-	test_question.answer3 = value.answer3
-	test_question.answer4 = value.answer4
-	test_question.correctAns = value.correctAns
-
-func get_test_question():
-	return test_question
