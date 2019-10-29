@@ -14,7 +14,7 @@ onready var answer4 : Label = $Container/VBoxContainer2/Answer4/LineEdit
 onready var dropdown : OptionButton  = $Container/VBoxContainer2/HBoxContainer2/Dropdown
 onready var itemSelected
 onready var questionNumSelected
-onready var difficultySelected = "NULL"
+onready var questionNumDropdown : OptionButton  = $Container/VBoxContainer2/Selections/QuestionNumDropdown
 
 var socialMediaMode
 var new_question := false
@@ -30,8 +30,9 @@ var questionObj := {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Firebase.get_document("custom/%s" % Firebase.username, http)
+	#Firebase.get_document("custom/%s" % Firebase.username, http)
 	add_items()
+	add_questionItems()
 	if(Firebase.username == "teacher"):
 		title.set_text("Create Assignment")
 	else:
@@ -145,3 +146,17 @@ func _on_fbBtn_pressed():
 
 func _on_closeBtn_pressed():
 	socialMediaPopup.hide()
+
+func add_questionItems():
+	 questionNumDropdown.add_item("QN")
+	 questionNumDropdown.add_separator()
+	 questionNumDropdown.add_item("Q1")
+	 questionNumDropdown.add_item("Q2")
+	 questionNumDropdown.add_item("Q3")
+	 questionNumDropdown.add_item("Q4")
+	 questionNumDropdown.add_item("Q5")
+	
+func _on_QuestionNumDropdown_item_selected(ID):
+	questionNumSelected = questionNumDropdown.get_item_text(ID)
+	Firebase.get_document("custom/" + Firebase.username + "/qns/" + questionNumSelected, http)
+	#notification.text = "Please choose a difficulty"
