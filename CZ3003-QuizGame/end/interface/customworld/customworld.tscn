@@ -33,31 +33,23 @@ text = "CHOOSE CUSTOM LEVEL"
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1870.0
-margin_bottom = 307.0
+margin_bottom = 292.0
 custom_constants/separation = 15
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_right = 1870.0
+margin_bottom = 85.0
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_top = 15.0
-margin_right = 1870.0
-margin_bottom = 100.0
-alignment = 1
-
-[node name="BackButton" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer3"]
+[node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
 margin_left = 832.0
 margin_right = 1038.0
-margin_bottom = 85.0
-
-[node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer3/BackButton"]
-margin_right = 206.0
 margin_bottom = 85.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
 text = "BACK"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer3/BackButton/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

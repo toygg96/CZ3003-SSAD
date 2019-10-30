@@ -145,6 +145,11 @@ func _on_fbBtn_pressed():
 	yield(get_tree().create_timer(1.8), "timeout")
 	socialMediaPopup.hide()
 
+func _on_twitterBtn_pressed():
+	Firebase.generate_twitter_link(http2, socialMediaMode)
+	yield(get_tree().create_timer(1.8), "timeout")
+	socialMediaPopup.hide()
+	
 func _on_closeBtn_pressed():
 	socialMediaPopup.hide()
 
@@ -160,4 +165,4 @@ func add_questionItems():
 func _on_QuestionNumDropdown_item_selected(ID):
 	questionNumSelected = questionNumDropdown.get_item_text(ID)
 	Firebase.get_document("custom/" + Firebase.username + "/qns/" + questionNumSelected, http)
-	#notification.text = "Please choose a difficulty"
+	notification.text = "Please choose a difficulty"
