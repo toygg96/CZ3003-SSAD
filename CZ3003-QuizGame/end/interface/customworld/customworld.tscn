@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://interface/customworld/customworld.gd" type="Script" id=1]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=2]
+[ext_resource path="res://interface/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=4]
+
+[node name="world" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = -25.0
+margin_bottom = -25.0
+custom_constants/separation = 50
+
+[node name="Title" parent="Container" instance=ExtResource( 3 )]
+text = "CHOOSE CUSTOM LEVEL"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
+margin_top = 207.0
+margin_right = 1870.0
+margin_bottom = 307.0
+custom_constants/separation = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
+margin_right = 1870.0
+alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Container/VBoxContainer2"]
+margin_top = 15.0
+margin_right = 1870.0
+margin_bottom = 100.0
+alignment = 1
+
+[node name="BackButton" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer3"]
+margin_left = 832.0
+margin_right = 1038.0
+margin_bottom = 85.0
+
+[node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer3/BackButton"]
+margin_right = 206.0
+margin_bottom = 85.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 4 )
+text = "BACK"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer3/BackButton/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

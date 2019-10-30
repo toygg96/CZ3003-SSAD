@@ -30,4 +30,4 @@ func _on_World5_pressed():
 
 func _on_World6_pressed():
 	Firebase.worldSelected = "World6"
-	return get_tree().change_scene("res://interface/difficulty/difficulty.tscn")
+	return get_tree().change_scene("res://interface/customworld/customworld.tscn")

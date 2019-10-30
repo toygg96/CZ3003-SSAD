@@ -88,20 +88,21 @@ func _on_ConfirmButton_pressed() -> void:
 		true:
 			print(Firebase.username)
 			information_sent = true
+			Firebase.save_document("custom/?documentId=%s" % Firebase.username, {},http)
+			yield(get_tree().create_timer(1.0), "timeout")
 			Firebase.save_document("custom/%s" % Firebase.username + "/qns/?documentId=%s" % questionNumSelected, questionObj, http)
 			#Firebase.generate_fb_link(http2,"created")
-			yield(get_tree().create_timer(1.5), "timeout")
+			yield(get_tree().create_timer(1.2), "timeout")
 			socialMediaMode = "created"	
 			print(information_sent)
 		false:
 			print(questionObj.correctAns)
 			information_sent = true
 			Firebase.update_document("custom/%s" % Firebase.username + "/qns/%s" % questionNumSelected , questionObj, http)
-			yield(get_tree().create_timer(1.5), "timeout")
+			yield(get_tree().create_timer(1.2), "timeout")
 			#Firebase.generate_fb_link(http2,"updated")
 			socialMediaMode = "updated"
 	socialMediaPopup.show()
-
 
 func set_questionObj(value: Dictionary) -> void:
 	questionObj = value
