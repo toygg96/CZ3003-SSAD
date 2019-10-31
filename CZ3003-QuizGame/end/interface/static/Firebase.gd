@@ -28,6 +28,8 @@ var username
 var worldSelected
 var difficultySelected
 var dateRFC1123
+var customLevelSelected
+var customLevelBoolean = false
 
 func _get_user_info(result: Array) -> Dictionary:
 	var result_body := JSON.parse(result[3].get_string_from_ascii()).result as Dictionary

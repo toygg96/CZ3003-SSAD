@@ -114,9 +114,13 @@ func _ready():
 	AP_bar.max_value = AP_idx
 	AP_bar.value = AP_idx
 	print(Firebase.user_info.id);
-	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
+	if(Firebase.customLevelBoolean):
+		Firebase.get_document("custom/%s" % Firebase.customLevelSelected + "/qns/" + ("Q"+str(questionNum)) , http)
+	else:
+		Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)	
 
 func _on_ButtonQuit_pressed():
+	Firebase.customLevelBoolean = false	
 	get_tree().change_scene("res://interface/MenuGame.tscn")
 
 func _generate_player_life_all(t: int)->void:
@@ -295,7 +299,11 @@ func _on_Next_pressed():
 	
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
-	Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
+	if(Firebase.customLevelBoolean):
+		Firebase.get_document("custom/%s" % Firebase.customLevelSelected + "/qns/" + ("Q"+str(questionNum)) , http)
+	else:
+		Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
+	Firebase.customLevelBoolean = false	
 	disableInput = false
 	next_button.hide()
 	for i in [0,1,2,3]:
