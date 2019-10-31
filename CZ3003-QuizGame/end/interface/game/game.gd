@@ -176,7 +176,8 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			teacherToken = Firebase.user_info.id
 			questionNum = 1
 			next_button.hide()
-			if teacherTokenBool == false:
+			print(Firebase.customLevelBoolean)
+			if (teacherTokenBool == false) || (Firebase.customLevelBoolean):
 				#http.set_use_threads(true)
 				_updateProfile()
 			else:
@@ -269,6 +270,8 @@ func checkAnswer(ev,num):
 		next_button.show()	
 	
 func _consume_AP(cAP: int)->void:
+	if(Firebase.customLevelBoolean):
+		ACost = 1
 	if cAP >= ACost:
 		AP_idx -= ACost
 		AP_bar.value = AP_idx
@@ -297,14 +300,12 @@ func clear_questionsAnswers():
 func _on_Next_pressed():
 	if AP_idx == 0:
 		_on_ButtonQuit_pressed()
-	
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
 	if(Firebase.customLevelBoolean):
 		Firebase.get_document("custom/%s" % Firebase.customLevelSelected + "/qns/" + ("Q"+str(questionNum)) , http)
 	else:
 		Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
-	Firebase.customLevelBoolean = false	
 	disableInput = false
 	next_button.hide()
 	for i in [0,1,2,3]:
@@ -344,3 +345,4 @@ func _updateProfile():
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
 	information_sent = true
+	_on_ButtonQuit_pressed()
