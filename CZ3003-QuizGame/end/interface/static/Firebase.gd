@@ -100,14 +100,14 @@ func generate_fb_link(http: HTTPRequest, mode: String) -> void:
 	http.request(url,["Content-Type: application/json"], true, HTTPClient.METHOD_POST,"")
 
 func generate_twitter_link(http: HTTPRequest, mode: String) -> void:
-	var url
+	var body
 	get_date_time()
 	print(dateRFC1123)
 	if (mode == "created"):
-		url = FB_URL + "[" + dateRFC1123 + "]%20A%20new%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0A&link=https://app.SEQuizGame"
+		body = "tweet=[" + dateRFC1123 + "]%20A%20new%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Alink=https://app.SEQuizGame"
 	elif (mode == "updated"):
-		url = FB_URL + "[" + dateRFC1123 + "]%20An%20existing%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0A&link=https://app.SEQuizGame"
-	http.request(url,["Content-Type: application/json"], true, HTTPClient.METHOD_POST,"")	
+		body = "tweet[" + dateRFC1123 + "]%20An%20existing%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Alink=https://app.SEQuizGame"
+	http.request(TWITTER_URL,["Content-Type: application/x-www-form-urlencoded"], false, HTTPClient.METHOD_POST, body)	
 
 func get_date_time() -> void:
 	var time

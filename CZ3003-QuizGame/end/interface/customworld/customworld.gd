@@ -3,7 +3,7 @@ onready var http : HTTPRequest = $HTTPRequest
 onready var scrollContainer = $Container/VBoxContainer2/ScrollContainer/VBoxContainer
 var user = []
 var buttonGrp = []
-var x = 190
+var x = 700
 var y = 160
 var count = 0
 var i = 0
@@ -26,7 +26,7 @@ func _ready():
 		button1.add_font_override("font",load("res://interface/fonts/montserrat_eb_64.tres"))
 		button1.set_text(user[i]["name"])
 		i = i + 1
-		x = x + 370		
+		#x = x + 370		
 		button1.connect("pressed",self,"custom_level_pressed", [button1])
 		button1.show()
 		scrollContainer.add_child(button1)

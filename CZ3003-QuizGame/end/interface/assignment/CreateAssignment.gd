@@ -3,6 +3,7 @@ extends Node
 # Declare member variables here. Examples:
 onready var http : HTTPRequest = $HTTPRequest
 onready var http2 : HTTPRequest = $HTTPRequest2
+onready var http3 : HTTPRequest = $HTTPRequest3
 onready var socialMediaPopup = $socialMediaPopup
 onready var title = $Container/Title
 onready var question : Label = $Container/VBoxContainer2/Question/LineEdit
@@ -73,6 +74,15 @@ func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 			notification.text = "Post to FB failed"
 		200:
 			notification.text = "Successfully posted to FB"
+
+func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
+	print("response  code[TWITTER]: " , response_code)
+	print(body.get_string_from_ascii())
+	match response_code:
+		404:
+			notification.text = "Post to Twitter failed"
+		200:
+			notification.text = "Successfully posted to Twitter"
 
 func _on_ConfirmButton_pressed() -> void:
 	if question.text.empty() or answer1.text.empty() or answer2.text.empty() or answer3.text.empty() or answer4.text.empty() or itemSelected == "NULL":
@@ -146,7 +156,7 @@ func _on_fbBtn_pressed():
 	socialMediaPopup.hide()
 
 func _on_twitterBtn_pressed():
-	Firebase.generate_twitter_link(http2, socialMediaMode)
+	Firebase.generate_twitter_link(http3, socialMediaMode)
 	yield(get_tree().create_timer(1.8), "timeout")
 	socialMediaPopup.hide()
 	
