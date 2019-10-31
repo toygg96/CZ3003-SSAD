@@ -249,6 +249,7 @@ autowrap = true
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="socialMediaPopup" type="PopupMenu" parent="."]
+visible = true
 margin_right = 20.0
 margin_bottom = 20.0
 
@@ -294,4 +295,5 @@ texture_normal = ExtResource( 9 )
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="request_completed" from="HTTPRequest2" to="." method="_on_HTTPRequest2_request_completed"]
 [connection signal="pressed" from="socialMediaPopup/fbBtn" to="." method="_on_fbBtn_pressed"]
+[connection signal="pressed" from="socialMediaPopup/twitterBtn" to="." method="_on_twitterBtn_pressed"]
 [connection signal="pressed" from="socialMediaPopup/closeBtn" to="." method="_on_closeBtn_pressed"]

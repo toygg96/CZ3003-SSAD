@@ -33,20 +33,26 @@ var profile := {
 func _ready() -> void:
 	if (Firebase.new_character):
 		title.set_text("CREATE NEW CHARACTER")
-		HP.hide()
-		AP.hide()
+		HP.set_editable(false)
+		AP.set_editable(false)
 		back_button.hide()
 	elif (Firebase.upgrade_character) :
 		title.set_text("UPGRADE CHARACTER")
-		fetchExistingProfiel()	
+		fetchExistingProfiel()
+		HP.value = int(Firebase.profile.HP.integerValue)
+		AP.value = int(Firebase.profile.AP.integerValue)
 	else:
 		title.set_text("VIEW CHARACTER")
+		fetchExistingProfiel()
+		HP.value = int(Firebase.profile.HP.integerValue)
+		AP.value = int(Firebase.profile.AP.integerValue)
+		overallScore.text = Firebase.profile.overallScore.integerValue
 		nickname.set_editable(false)
 		character_class.set_editable(false)
 		HP.set_editable(false)
 		AP.set_editable(false)
 		confirm_button.hide()
-		fetchExistingProfiel()	
+		
 	#Firebase.get_document("users/%s" % Firebase.username, http)
 
 
@@ -85,9 +91,6 @@ func _on_ConfirmButton_pressed() -> void:
 			profile.overallScore = { "integerValue": 0 }
 			profile.HP = { "integerValue": 5 }
 			profile.AP = { "integerValue": 5 }
-			print()
-			print(Firebase.username)
-			print('DAWG')
 			print(profile)
 			information_sent = true
 			Firebase.save_document("users?documentId=%s" % Firebase.username, profile, http)
@@ -97,9 +100,16 @@ func _on_ConfirmButton_pressed() -> void:
 			profile.character_class = { "stringValue": character_class.text }
 			profile.HP = { "integerValue": HP.value }
 			profile.AP = { "integerValue": AP.value }
+			profile.W1Score = { "integerValue": Firebase.profile.W1Score.integerValue}
+			profile.W2Score = { "integerValue": Firebase.profile.W2Score.integerValue}
+			profile.W3Score = { "integerValue": Firebase.profile.W3Score.integerValue}
+			profile.W4Score = { "integerValue": Firebase.profile.W4Score.integerValue}
+			profile.W5Score = { "integerValue": Firebase.profile.W5Score.integerValue}
 			profile.upPoints = { "integerValue": upgradeP }
+			profile.overallScore = { "integerValue": Firebase.profile.overallScore.integerValue }
 			information_sent = true
-			Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
+			Firebase.upgrade_character = false
+			Firebase.update_document("users/%s" % Firebase.username, profile, http)
 			#get_tree().change_scene("res://interface/MenuGame.tscn")
 
 
@@ -115,11 +125,46 @@ func fetchExistingProfiel():
 	nickname.text = Firebase.profile.nickname.stringValue
 	character_class.text = Firebase.profile.character_class.stringValue
 	HP.value = int(Firebase.profile.HP.integerValue)
+	print(Firebase.profile.HP.integerValue)
 	AP.value = int(Firebase.profile.AP.integerValue)
-	OHP = HP.value
-	OAP = AP.value
+	print(Firebase.profile.AP.integerValue)
+	OHP = int(Firebase.profile.HP.integerValue)
+	OAP = int(Firebase.profile.AP.integerValue)
 	upgradeP = int(Firebase.profile.upPoints.integerValue)
 	overallScore.text = str(Firebase.profile.upPoints.integerValue)
 
 func _on_Button_pressed():
+	Firebase.upgrade_character = false
 	return get_tree().change_scene("res://interface/MenuGame.tscn")
+
+func _on_HP_Slider_value_changed(value):
+	if HP.value >= OHP:
+		if upgradeP < 500:
+			HP.value = OHP
+			return
+		else:
+			upgradeP -= 500
+			OHP = HP.value
+			overallScore.text = str(upgradeP)
+			return
+	elif HP.value <= OHP:
+		upgradeP += 500	
+		OHP = HP.value
+		overallScore.text = str(upgradeP)
+	
+
+func _on_AP_Slider_value_changed(value):
+	if AP.value >= OAP:
+		if upgradeP < 1000:
+			AP.value = OAP
+			return
+		else:
+			upgradeP -= 1000
+			OAP = AP.value
+			overallScore.text = str(upgradeP)
+			return
+	elif AP.value <= OAP:
+		upgradeP += 1000
+		OAP = AP.value
+		overallScore.text = str(upgradeP)
+	

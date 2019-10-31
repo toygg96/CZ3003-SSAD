@@ -27,7 +27,7 @@ margin_bottom = -25.0
 custom_constants/separation = 50
 
 [node name="Title" parent="Container" instance=ExtResource( 3 )]
-text = "CHOOSE DIFFICULTY"
+text = "CHOOSE LEVEL"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
@@ -41,25 +41,25 @@ margin_bottom = 85.0
 alignment = 1
 
 [node name="Easy" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 495.0
-margin_right = 685.0
+margin_left = 513.0
+margin_right = 783.0
 margin_bottom = 85.0
 custom_fonts/font = ExtResource( 4 )
-text = "EASY"
+text = "LEVEL 1"
 
 [node name="Difficult" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 689.0
-margin_right = 1057.0
+margin_left = 787.0
+margin_right = 1069.0
 margin_bottom = 85.0
 custom_fonts/font = ExtResource( 4 )
-text = "DIFFICULT"
+text = "LEVEL 2"
 
 [node name="Lunatic" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 1061.0
-margin_right = 1374.0
+margin_left = 1073.0
+margin_right = 1356.0
 margin_bottom = 85.0
 custom_fonts/font = ExtResource( 4 )
-text = "LUNATIC"
+text = "LEVEL 3"
 
 [node name="BackButton" type="Button" parent="Container/VBoxContainer2"]
 margin_left = 832.0
