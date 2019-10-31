@@ -249,7 +249,6 @@ autowrap = true
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="socialMediaPopup" type="PopupMenu" parent="."]
-visible = true
 margin_right = 20.0
 margin_bottom = 20.0
 
