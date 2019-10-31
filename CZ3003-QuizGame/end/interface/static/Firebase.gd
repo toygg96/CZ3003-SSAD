@@ -104,9 +104,9 @@ func generate_twitter_link(http: HTTPRequest, mode: String) -> void:
 	get_date_time()
 	print(dateRFC1123)
 	if (mode == "created"):
-		body = "tweet=[" + dateRFC1123 + "]%20A%20new%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Alink=https://app.SEQuizGame"
+		body = "tweet=[" + dateRFC1123 + "]%20A%20new%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Ahttps://app.SEQuizGame"
 	elif (mode == "updated"):
-		body = "tweet[" + dateRFC1123 + "]%20An%20existing%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Alink=https://app.SEQuizGame"
+		body = "tweet=[" + dateRFC1123 + "]%20An%20existing%20assignment%20has%20been%20" + mode + "%20by%20" + Firebase.username + ".%20Please%20check%20out%20the%20assignment%20by%20launching%20the%20game%20and%20going%20to%20Custom%20World.%0Ahttps://app.SEQuizGame"
 	http.request(TWITTER_URL,["Content-Type: application/x-www-form-urlencoded"], false, HTTPClient.METHOD_POST, body)	
 
 func get_date_time() -> void:
