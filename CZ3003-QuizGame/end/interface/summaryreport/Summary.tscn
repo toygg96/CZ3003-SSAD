@@ -49,16 +49,22 @@ rect_min_size = Vector2( 1000, 0 )
 alignment = 1
 
 [node name="Label" type="Label" parent="Score container/searchbar"]
-margin_left = 273.0
+margin_left = 261.0
 margin_top = 10.0
-margin_right = 462.0
+margin_right = 450.0
 margin_bottom = 70.0
 custom_fonts/font = ExtResource( 5 )
 text = "Search:"
 
+[node name="MarginContainer" type="MarginContainer" parent="Score container/searchbar"]
+margin_left = 454.0
+margin_right = 474.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 0 )
+
 [node name="SearchInput" type="LineEdit" parent="Score container/searchbar"]
-margin_left = 466.0
-margin_right = 1466.0
+margin_left = 478.0
+margin_right = 1478.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 1000, 0 )
 clear_button_enabled = true
@@ -66,21 +72,26 @@ placeholder_text = "Enter name"
 placeholder_alpha = 0.675
 
 [node name="TextureButton" type="TextureButton" parent="Score container/searchbar"]
-margin_left = 1470.0
-margin_right = 1550.0
+margin_left = 1482.0
+margin_right = 1562.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 80 )
 texture_normal = ExtResource( 6 )
 
-[node name="scores" type="VBoxContainer" parent="Score container"]
+[node name="MarginContainer" type="MarginContainer" parent="Score container"]
 margin_top = 84.0
 margin_right = 1823.0
-margin_bottom = 144.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="scores" type="VBoxContainer" parent="Score container"]
+margin_top = 188.0
+margin_right = 1823.0
+margin_bottom = 248.0
 
 [node name="report" type="Label" parent="Score container/scores"]
-margin_top = 30.0
 margin_right = 1823.0
-margin_bottom = 90.0
+margin_bottom = 60.0
 custom_fonts/font = ExtResource( 5 )
 align = 1
 
@@ -98,4 +109,7 @@ custom_fonts/font = ExtResource( 4 )
 text = "BACK"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="text_changed" from="Score container/searchbar/SearchInput" to="." method="_on_SearchInput_text_changed"]
+[connection signal="pressed" from="Score container/searchbar/TextureButton" to="." method="_on_search_button_pressed"]
+[connection signal="pressed" from="back container/Button" to="." method="_on_back_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
