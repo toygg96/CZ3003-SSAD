@@ -3,6 +3,8 @@ extends TextureRect
 onready var http : HTTPRequest = $HTTPRequest
 onready var username : LineEdit = $VBoxMain/VBoxGreeting/LabelName
 onready var createLevelBtn = $VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/CreateLevel
+onready var summaryReportBtn = $VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer/SummaryReport
+
 var profile := {
 	"nickname": {},
 	"character_class": {},
@@ -28,7 +30,7 @@ func _ready() -> void:
 	if(Firebase.username == "teacher"):
 		createLevelBtn.set_text("CREATE ASSIGNMENT")
 	else:
-		pass
+		summaryReportBtn.hide()
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
@@ -65,3 +67,6 @@ func _on_Upgrade_Character_pressed():
 
 func _on_Leaderboards_pressed():
 	return get_tree().change_scene("res://interface/leaderboard/leaderboard.tscn")
+	
+func _on_SummaryReport_pressed():
+	return get_tree().change_scene("res://interface/summaryreport/Summary.tscn")

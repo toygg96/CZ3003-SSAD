@@ -1,6 +1,101 @@
-[gd_scene format=2]
+[gd_scene load_steps=7 format=2]
 
-[node name="Control" type="Control"]
+[ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://interface/summaryreport/Summary.gd" type="Script" id=2]
+[ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=3]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=4]
+[ext_resource path="res://interface/fonts/montserrat_eb_48.tres" type="DynamicFont" id=5]
+[ext_resource path="res://backgrounds/search icon.png" type="Texture" id=6]
+
+[node name="Summary" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -2.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 3 )
+
+[node name="title" type="VBoxContainer" parent="."]
+editor/display_folded = true
+margin_left = 264.0
+margin_top = 50.0
+margin_right = 1659.0
+margin_bottom = 129.0
+
+[node name="Label" type="Label" parent="title"]
+margin_right = 1395.0
+margin_bottom = 79.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 1, 0.439216, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "SUMMARY REPORT"
+align = 1
+valign = 1
+
+[node name="Score container" type="VBoxContainer" parent="."]
+margin_left = 50.0
+margin_top = 139.0
+margin_right = 1873.0
+margin_bottom = 889.0
+
+[node name="searchbar" type="HBoxContainer" parent="Score container"]
+margin_right = 1823.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 1000, 0 )
+alignment = 1
+
+[node name="Label" type="Label" parent="Score container/searchbar"]
+margin_left = 273.0
+margin_top = 10.0
+margin_right = 462.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+text = "Search:"
+
+[node name="SearchInput" type="LineEdit" parent="Score container/searchbar"]
+margin_left = 466.0
+margin_right = 1466.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 1000, 0 )
+clear_button_enabled = true
+placeholder_text = "Enter name"
+placeholder_alpha = 0.675
+
+[node name="TextureButton" type="TextureButton" parent="Score container/searchbar"]
+margin_left = 1470.0
+margin_right = 1550.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 6 )
+
+[node name="scores" type="VBoxContainer" parent="Score container"]
+margin_top = 84.0
+margin_right = 1823.0
+margin_bottom = 144.0
+
+[node name="report" type="Label" parent="Score container/scores"]
+margin_top = 30.0
+margin_right = 1823.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 5 )
+align = 1
+
+[node name="back container" type="VBoxContainer" parent="."]
+margin_left = 857.0
+margin_top = 960.0
+margin_right = 1056.0
+margin_bottom = 1045.0
+rect_min_size = Vector2( 206, 85 )
+
+[node name="Button" type="Button" parent="back container"]
+margin_right = 206.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 4 )
+text = "BACK"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

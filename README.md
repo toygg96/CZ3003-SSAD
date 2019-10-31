@@ -1,2 +1,0 @@
-# CZ3003-SSAD
-Quiz RPG Game 
