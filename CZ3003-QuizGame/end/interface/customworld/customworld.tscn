@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_horizontal_guides_": [  ],
 "_edit_vertical_guides_": [  ]
 }
 
@@ -33,23 +34,33 @@ text = "CHOOSE CUSTOM LEVEL"
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1870.0
-margin_bottom = 292.0
+margin_bottom = 807.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Container/VBoxContainer2"]
 margin_right = 1870.0
-margin_bottom = 85.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 300, 500 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer2/ScrollContainer"]
+margin_right = 12.0
+margin_bottom = 12.0
 alignment = 1
 
-[node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer"]
+[node name="VScrollBar" type="VScrollBar" parent="Container/VBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="BackButton" type="Button" parent="Container/VBoxContainer2"]
 margin_left = 832.0
+margin_top = 515.0
 margin_right = 1038.0
-margin_bottom = 85.0
+margin_bottom = 600.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
 text = "BACK"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-[connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer2/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

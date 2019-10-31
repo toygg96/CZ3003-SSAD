@@ -25,6 +25,7 @@ var profile := {
 	"W3Score": {},
 	"W4Score": {},
 	"W5Score": {},
+	"W6Score" : {},
 	"upPoints": {},
 	"overallScore": {}
 } setget set_profile
@@ -33,6 +34,8 @@ var profile := {
 func _ready() -> void:
 	if (Firebase.new_character):
 		title.set_text("CREATE NEW CHARACTER")
+		nickname.text = Firebase.username
+		nickname.set_editable(false)
 		HP.set_editable(false)
 		AP.set_editable(false)
 		back_button.hide()
@@ -80,13 +83,14 @@ func _on_ConfirmButton_pressed() -> void:
 
 	if(Firebase.new_character):
 		#true:	
-			profile.nickname = { "stringValue": nickname.text }
+			profile.nickname = { "stringValue": Firebase.username }
 			profile.character_class = { "stringValue": character_class.text }
 			profile.W1Score = { "integerValue": 0}
 			profile.W2Score = { "integerValue": 0}
 			profile.W3Score = { "integerValue": 0}
 			profile.W4Score = { "integerValue": 0}
 			profile.W5Score = { "integerValue": 0}
+			profile.W6Score = { "integerValue": 0}
 			profile.upPoints = { "integerValue": 0}
 			profile.overallScore = { "integerValue": 0 }
 			profile.HP = { "integerValue": 5 }
