@@ -18,6 +18,7 @@ onready var questionNumSelected
 onready var questionNumDropdown : OptionButton  = $Container/VBoxContainer2/Selections/QuestionNumDropdown
 
 var socialMediaMode
+var createQnsCollection = false
 var new_question := false
 var information_sent := false
 var questionObj := {
@@ -56,7 +57,8 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 		400:
 			notification.text = "HTTP 400 Correct ans is null. Status: INVALID_ARGUMENT" 
 		409:
-			notification.text = "No changes were made" 
+			if(!(createQnsCollection)):
+				notification.text = "No changes were made" 
 		200:
 			if information_sent:
 				notification.text = "Information saved successfully"
@@ -99,9 +101,10 @@ func _on_ConfirmButton_pressed() -> void:
 			print(Firebase.username)
 			information_sent = true
 			Firebase.save_document("custom/?documentId=%s" % Firebase.username, {},http)
+			createQnsCollection = true
 			yield(get_tree().create_timer(1.0), "timeout")
 			Firebase.save_document("custom/%s" % Firebase.username + "/qns/?documentId=%s" % questionNumSelected, questionObj, http)
-			#Firebase.generate_fb_link(http2,"created")
+			createQnsCollection = false
 			yield(get_tree().create_timer(1.2), "timeout")
 			socialMediaMode = "created"	
 			print(information_sent)
