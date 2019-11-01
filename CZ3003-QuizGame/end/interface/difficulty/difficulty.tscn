@@ -37,13 +37,11 @@ custom_constants/separation = 150
 dragger_visibility = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container/VSplitContainer"]
-editor/display_folded = true
 margin_right = 1870.0
 margin_bottom = 85.0
 custom_constants/separation = 15
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VSplitContainer/VBoxContainer2"]
-editor/display_folded = true
 margin_right = 1870.0
 margin_bottom = 85.0
 custom_constants/separation = 70

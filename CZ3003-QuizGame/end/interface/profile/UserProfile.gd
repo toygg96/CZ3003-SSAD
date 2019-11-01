@@ -21,10 +21,25 @@ var profile := {
 	"HP": {},
 	"AP": {},
 	"W1Score": {},
+	"W1L1Score" : {},
+	"W1L2Score" : {},
+	"W1L3Score" : {},
 	"W2Score": {},
+	"W2L1Score" : {},
+	"W2L2Score" : {},
+	"W2L3Score" : {},
 	"W3Score": {},
+	"W3L1Score" : {},
+	"W3L2Score" : {},
+	"W3L3Score" : {},
 	"W4Score": {},
+	"W4L1Score" : {},
+	"W4L2Score" : {},
+	"W4L3Score" : {},
 	"W5Score": {},
+	"W5L1Score" : {},
+	"W5L2Score" : {},
+	"W5L3Score" : {},
 	"W6Score" : {},
 	"upPoints": {},
 	"overallScore": {}
@@ -86,10 +101,25 @@ func _on_ConfirmButton_pressed() -> void:
 			profile.nickname = { "stringValue": Firebase.username }
 			profile.character_class = { "stringValue": character_class.text }
 			profile.W1Score = { "integerValue": 0}
+			profile.W1L1Score = { "integerValue": 0}
+			profile.W1L2Score = { "integerValue": 0}
+			profile.W1L3Score = { "integerValue": 0}
 			profile.W2Score = { "integerValue": 0}
+			profile.W2L1Score = { "integerValue": 0}
+			profile.W2L2Score = { "integerValue": 0}
+			profile.W2L3Score = { "integerValue": 0}
 			profile.W3Score = { "integerValue": 0}
+			profile.W3L1Score = { "integerValue": 0}
+			profile.W3L2Score = { "integerValue": 0}
+			profile.W3L3Score = { "integerValue": 0}
 			profile.W4Score = { "integerValue": 0}
+			profile.W4L1Score = { "integerValue": 0}
+			profile.W4L2Score = { "integerValue": 0}
+			profile.W4L3Score = { "integerValue": 0}
 			profile.W5Score = { "integerValue": 0}
+			profile.W5L1Score = { "integerValue": 0}
+			profile.W5L2Score = { "integerValue": 0}
+			profile.W5L3Score = { "integerValue": 0}
 			profile.W6Score = { "integerValue": 0}
 			profile.upPoints = { "integerValue": 0}
 			profile.overallScore = { "integerValue": 0 }
@@ -105,10 +135,25 @@ func _on_ConfirmButton_pressed() -> void:
 			profile.HP = { "integerValue": HP.value }
 			profile.AP = { "integerValue": AP.value }
 			profile.W1Score = { "integerValue": Firebase.profile.W1Score.integerValue}
+			profile.W1L1Score = { "integerValue": Firebase.profile.W1L1Score.integerValue}
+			profile.W1L2Score = { "integerValue": Firebase.profile.W1L2Score.integerValue}
+			profile.W1L3Score = { "integerValue": Firebase.profile.W1L3Score.integerValue}
 			profile.W2Score = { "integerValue": Firebase.profile.W2Score.integerValue}
+			profile.W2L1Score = { "integerValue": Firebase.profile.W2L1Score.integerValue}
+			profile.W2L2Score = { "integerValue": Firebase.profile.W2L2Score.integerValue}
+			profile.W2L3Score = { "integerValue": Firebase.profile.W2L3Score.integerValue}
 			profile.W3Score = { "integerValue": Firebase.profile.W3Score.integerValue}
+			profile.W3L1Score = { "integerValue": Firebase.profile.W3L1Score.integerValue}
+			profile.W3L2Score = { "integerValue": Firebase.profile.W3L2Score.integerValue}
+			profile.W3L3Score = { "integerValue": Firebase.profile.W3L3Score.integerValue}
 			profile.W4Score = { "integerValue": Firebase.profile.W4Score.integerValue}
+			profile.W4L1Score = { "integerValue": Firebase.profile.W4L1Score.integerValue}
+			profile.W4L2Score = { "integerValue": Firebase.profile.W4L2Score.integerValue}
+			profile.W4L3Score = { "integerValue": Firebase.profile.W4L3Score.integerValue}
 			profile.W5Score = { "integerValue": Firebase.profile.W5Score.integerValue}
+			profile.W5L1Score = { "integerValue": Firebase.profile.W5L1Score.integerValue}
+			profile.W5L2Score = { "integerValue": Firebase.profile.W5L2Score.integerValue}
+			profile.W5L3Score = { "integerValue": Firebase.profile.W5L3Score.integerValue}
 			profile.upPoints = { "integerValue": upgradeP }
 			profile.overallScore = { "integerValue": Firebase.profile.overallScore.integerValue }
 			information_sent = true

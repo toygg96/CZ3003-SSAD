@@ -21,7 +21,6 @@ onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Pan
 onready var answer_panel_4_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel2")
 onready var questionNum = 1
 onready var teacherToken = "7FlV5gLCeBTYuGnvLd0k0W1dHps2"
-onready var teacherTokenBool = true
 
 onready var answer_nodes = [
 answer_panel_1_node.get_node("Panel/VBoxContainer/Answer1"),
@@ -39,19 +38,37 @@ answer_panel_4_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint
 onready var lifes_idx = 0;
 onready var AP_idx = 0;
 onready var Wscore = 0;
+onready var WLvlScore = 0;
 onready var Oscore = 0;
 onready var UPoints = 0;
 onready var wstring = "W%sScore"%int(Firebase.worldSelected)
+onready var wLvlString = "W%s"%int(Firebase.worldSelected) + "L%sScore" %int(Firebase.levelSelected)
+
 var profile := {
 	"nickname": {},
 	"character_class": {},
 	"HP": {},
 	"AP": {},
 	"W1Score": {},
+	"W1L1Score": {},
+	"W1L2Score": {},
+	"W1L3Score": {},
 	"W2Score": {},
+	"W2L1Score": {},
+	"W2L2Score": {},
+	"W2L3Score": {},
 	"W3Score": {},
+	"W3L1Score": {},
+	"W3L2Score": {},
+	"W3L3Score": {},
 	"W4Score": {},
+	"W4L1Score": {},
+	"W4L2Score": {},
+	"W4L3Score": {},
 	"W5Score": {},
+	"W5L1Score": {},
+	"W5L2Score": {},
+	"W5L3Score": {},
 	"W6Score" : {},
 	"upPoints": {},
 	"overallScore": {}
@@ -173,19 +190,14 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 		404:
 			print("No record found")
 			new_question = true
-			teacherToken = Firebase.user_info.id
 			questionNum = 1
 			next_button.hide()
 			print(Firebase.customLevelBoolean)
-			if (teacherTokenBool == false) || (Firebase.customLevelBoolean):
-				#http.set_use_threads(true)
-				_updateProfile()
+			#http.set_use_threads(true)
+			if (Firebase.customLevelBoolean):
+				_on_ButtonQuit_pressed()
 			else:
-				for i in [0,1,2,3]:
-					clear_answers(i)
-				Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)
-				teacherTokenBool = false
-				return
+				_updateProfile()
 		400:
 			print("HTTP 400")
 		200:
@@ -316,6 +328,7 @@ func set_profile(value: Dictionary) -> void:
 	lifes_idx = int(Firebase.profile.HP.integerValue)
 	AP_idx = int(Firebase.profile.AP.integerValue)
 	Wscore = int(Firebase.profile.wstring.integerValue)
+	WLvlScore = int(Firebase.profile.wLvlString.integerValue)
 	Oscore = int(Firebase.profile.overallScore.integerValue)
 	UPoints = int(Firebase.profile.upPoints.integerValue)
 
@@ -323,26 +336,61 @@ func fetchExistingProfiel():
 	lifes_idx = int(Firebase.profile.HP.integerValue)
 	AP_idx = int(Firebase.profile.AP.integerValue)
 	Wscore = int(Firebase.profile.get(wstring).integerValue) 
+	WLvlScore = int(Firebase.profile.get(wLvlString).integerValue)
 	Oscore = int(Firebase.profile.overallScore.integerValue)
 	UPoints = int(Firebase.profile.upPoints.integerValue)
 	
 func _updateProfile():
-	if score > Wscore:
-		Oscore = Oscore - Wscore + score
-		UPoints += score - Wscore
+	if score > WLvlScore:
+		if(Firebase.levelSelected == 1):
+			var buff1 = "W%s"%int(Firebase.worldSelected) + "L2Score" 
+			var buff2 = "W%s"%int(Firebase.worldSelected) + "L3Score"
+			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
+		if(Firebase.levelSelected == 2):
+			var buff1 = "W%s"%int(Firebase.worldSelected) + "L1Score" 
+			var buff2 = "W%s"%int(Firebase.worldSelected) + "L3Score"
+			print(Firebase.profile.get(buff1).integerValue)
+			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
+		if(Firebase.levelSelected == 3):
+			var buff1 = "W%s"%int(Firebase.worldSelected) + "L1Score" 
+			var buff2 = "W%s"%int(Firebase.worldSelected) + "L2Score"
+			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
 		if int(Firebase.worldSelected) == 1:
-			Firebase.profile.W1Score = { "integerValue": score }
+			Firebase.profile.W1Score = { "integerValue": Wscore }
+			match int(Firebase.levelSelected):
+				1: Firebase.profile.W1L1Score = { "integerValue" : score }
+				2: Firebase.profile.W1L2Score = { "integerValue" : score }
+				3: Firebase.profile.W1L3Score = { "integerValue" : score }
 		elif int(Firebase.worldSelected) == 2:
-			Firebase.profile.W2Score = { "integerValue": score }
+			Firebase.profile.W2Score = { "integerValue": Wscore }
+			match int(Firebase.levelSelected):
+				1: Firebase.profile.W2L1Score = { "integerValue" : score }
+				2: Firebase.profile.W2L2Score = { "integerValue" : score }
+				3: Firebase.profile.W2L3Score = { "integerValue" : score }
 		elif int(Firebase.worldSelected) == 3:
-			Firebase.profile.W3Score = { "integerValue": score }
+			Firebase.profile.W3Score = { "integerValue": Wscore }
+			match int(Firebase.levelSelected):
+				1: Firebase.profile.W3L1Score = { "integerValue" : score }
+				2: Firebase.profile.W3L2Score = { "integerValue" : score }
+				3: Firebase.profile.W3L3Score = { "integerValue" : score }
 		elif int(Firebase.worldSelected) == 4:
-			Firebase.profile.W4Score = { "integerValue": score }
+			Firebase.profile.W4Score = { "integerValue": Wscore }
+			match int(Firebase.levelSelected):
+				1: Firebase.profile.W4L1Score = { "integerValue" : score }
+				2: Firebase.profile.W4L2Score = { "integerValue" : score }
+				3: Firebase.profile.W4L3Score = { "integerValue" : score }
 		elif int(Firebase.worldSelected) == 5:
-			Firebase.profile.W5Score = { "integerValue": score }
+			Firebase.profile.W5Score = { "integerValue": Wscore }
+			match int(Firebase.levelSelected):
+				1: Firebase.profile.W5L1Score = { "integerValue" : score }
+				2: Firebase.profile.W5L2Score = { "integerValue" : score }
+				3: Firebase.profile.W5L3Score = { "integerValue" : score }
+		Oscore = int(Firebase.profile.W1Score.integerValue) + int(Firebase.profile.W2Score.integerValue) + int(Firebase.profile.W3Score.integerValue) + int(Firebase.profile.W4Score.integerValue) + int(Firebase.profile.W5Score.integerValue)
+		UPoints += score
 		Firebase.profile.overallScore = { "integerValue": Oscore }
 		Firebase.profile.upPoints = { "integerValue": UPoints }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
 	information_sent = true
+	yield(get_tree().create_timer(1.0), "timeout")
 	_on_ButtonQuit_pressed()

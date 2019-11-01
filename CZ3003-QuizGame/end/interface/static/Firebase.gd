@@ -14,10 +14,25 @@ onready var profile := {
 	"HP": {},
 	"AP": {},
 	"W1Score": {},
+	"W1L1Score": {},
+	"W1L2Score": {},
+	"W1L3Score": {},
 	"W2Score": {},
+	"W2L1Score": {},
+	"W2L2Score": {},
+	"W2L3Score": {},
 	"W3Score": {},
+	"W3L1Score": {},
+	"W3L2Score": {},
+	"W3L3Score": {},
 	"W4Score": {},
+	"W4L1Score": {},
+	"W4L2Score": {},
+	"W4L3Score": {},
 	"W5Score": {},
+	"W5L1Score": {},
+	"W5L2Score": {},
+	"W5L3Score": {},
 	"upPoints": {},
 	"overallScore": {}
 }
@@ -30,6 +45,7 @@ var difficultySelected
 var dateRFC1123
 var customLevelSelected
 var customLevelBoolean = false
+var levelSelected 
 
 func _get_user_info(result: Array) -> Dictionary:
 	var result_body := JSON.parse(result[3].get_string_from_ascii()).result as Dictionary
@@ -76,7 +92,6 @@ func save_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 
 func get_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
-	print(url)
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_GET)
 
 func update_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
