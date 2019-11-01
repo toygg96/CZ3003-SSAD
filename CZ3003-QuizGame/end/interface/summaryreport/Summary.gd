@@ -13,7 +13,6 @@ var average_w4_score = 0
 var average_w5_score = 0
 var average_w6_score = 0
 var defaultText = ""
-var profile = {} 
 
 func _ready():
 	Firebase.get_document("users/" , http)
@@ -30,9 +29,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 				if user.fields.nickname.stringValue == "teacher":
 					continue
 				
-				profile = user
-				
-				user_list.append(profile)
+				user_list.append(user)
 				
 			# print(user_list)
 			generate_scores()

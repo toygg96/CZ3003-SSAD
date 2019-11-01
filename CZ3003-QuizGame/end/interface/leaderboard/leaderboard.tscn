@@ -12,6 +12,9 @@ anchor_bottom = 1.0
 margin_left = 2.78955
 margin_right = 2.78955
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -3.0
@@ -19,45 +22,45 @@ margin_right = 1917.0
 margin_bottom = 1080.0
 texture = ExtResource( 2 )
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 400.0
 margin_top = 50.0
 margin_right = 1600.0
 margin_bottom = 207.0
-rect_min_size = Vector2( 800, 100 )
+rect_min_size = Vector2( 1000, 100 )
+custom_constants/separation = 50
 
 [node name="Label" parent="VBoxContainer" instance=ExtResource( 3 )]
 margin_right = 1200.0
-custom_colors/font_color_shadow = Color( 1, 0.439216, 0, 1 )
 text = "LEADERBOARD"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-margin_left = 110.0
-margin_top = 250.0
-margin_right = 1800.0
-margin_bottom = 950.0
+[node name="VBoxContainer3" type="VSplitContainer" parent="VBoxContainer"]
+margin_top = 207.0
+margin_right = 1200.0
+margin_bottom = 954.0
+rect_min_size = Vector2( 206, 85 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/VBoxContainer3"]
+margin_top = 50.0
+margin_right = 1200.0
+margin_bottom = 700.0
 rect_min_size = Vector2( 1000, 650 )
 
-[node name="ranking" type="Label" parent="VBoxContainer2"]
-margin_right = 1690.0
+[node name="ranking" type="Label" parent="VBoxContainer/VBoxContainer3/VBoxContainer2"]
+margin_right = 1200.0
 margin_bottom = 60.0
 custom_fonts/font = ExtResource( 4 )
 align = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="."]
-margin_left = 900.0
-margin_top = 960.0
-margin_right = 1100.0
-margin_bottom = 885.0
-rect_min_size = Vector2( 206, 85 )
-alignment = 1
-
-[node name="back" type="Button" parent="VBoxContainer3"]
-margin_right = 206.0
-margin_bottom = 85.0
+[node name="back" type="Button" parent="VBoxContainer/VBoxContainer3"]
+margin_left = 497.0
+margin_top = 662.0
+margin_right = 703.0
+margin_bottom = 747.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "BACK"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer3/back" to="." method="_on_back_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
-[connection signal="pressed" from="VBoxContainer3/back" to="." method="_on_back_pressed"]

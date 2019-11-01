@@ -1,7 +1,7 @@
 extends Node
 
 onready var http : HTTPRequest = $HTTPRequest
-onready var notification : Label = $VBoxContainer2/ranking
+onready var notification : Label = $VBoxContainer/VBoxContainer3/VBoxContainer2/ranking
 onready var title : Label = $VBoxContainer/Label
 
 var count = 0
