@@ -190,6 +190,17 @@ func fetchExistingProfiel():
 	OAP = int(Firebase.profile.AP.integerValue)
 	upgradeP = int(Firebase.profile.upPoints.integerValue)
 	overallScore.text = str(Firebase.profile.upPoints.integerValue)
+	load_sprite(character_class)
+	
+func load_sprite(character_class):
+	if character_class.text == "Mage":
+		set_sprite("Mage")
+	
+	elif character_class.text == "Warrior":
+		set_sprite("Warrior")
+	
+	else:
+		set_sprite("???")
 
 func _on_Button_pressed():
 	Firebase.upgrade_character = false
@@ -247,17 +258,21 @@ func hide_class_buttons(type):
 		confirm_button.hide()
 
 func _on_mage_button_pressed():
-	set_sprite("Mage")	
+	var job = "Mage"
+	set_sprite(job)
+	character_class.text = job
 
 func _on_knight_button_pressed():
-	set_sprite("Knight")	
+	var job = "Warrior"
+	set_sprite(job)
+	character_class.text = job
 	
+func set_sprite(character_class):
+	if character_class == "Mage":
+		character.set_texture(load("res://backgrounds/mage_idle.png"))
 	
-func set_sprite(job):
-	var sprite = get_node("Container/Sprite")
-	
-	if job == "Mage":
-		sprite.set_texture(load("res://backgrounds/mage_idle.png"))
+	elif character_class == "Warrior":
+		character.set_texture(load("res://backgrounds/warrior_idle.png"))
 		
 	else:
-		sprite.set_texture(load("res://backgrounds/warrior_idle.png"))
+		character.set_texture(load("res://backgrounds/rouge_idle.png"))
