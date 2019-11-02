@@ -195,7 +195,7 @@ func fetchExistingProfiel():
 	
 func load_sprite(character_class):
 	if character_class.text == "Mage":
-		set_sprite("Mage")
+		set_sprite("Mage")	
 	
 	elif character_class.text == "Warrior":
 		set_sprite("Warrior")

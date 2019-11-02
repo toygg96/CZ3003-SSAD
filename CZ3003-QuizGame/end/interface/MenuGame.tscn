@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://styles/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://interface/MenuGame.gd" type="Script" id=2]
 [ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=3]
-[ext_resource path="res://styles/header2_font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=6]
+[ext_resource path="res://styles/header_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=5]
 
 [node name="MenuGame" type="TextureRect"]
 anchor_right = 1.0
@@ -37,7 +36,7 @@ margin_bottom = 87.0
 
 [node name="HBoxProfile" type="HBoxContainer" parent="VBoxMain/HBoxLanguage"]
 margin_left = 16.0
-margin_right = 869.0
+margin_right = 952.0
 margin_bottom = 87.0
 size_flags_horizontal = 3
 
@@ -49,30 +48,17 @@ rect_min_size = Vector2( 150, 48 )
 size_flags_vertical = 4
 text = "VIEW CHARACTER"
 
-[node name="VBoxLanguage" type="VBoxContainer" parent="VBoxMain/HBoxLanguage"]
-margin_left = 885.0
-margin_right = 1035.0
-margin_bottom = 87.0
-alignment = 1
-
-[node name="OptionLanguage" type="OptionButton" parent="VBoxMain/HBoxLanguage/VBoxLanguage"]
-margin_top = 12.0
-margin_right = 150.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 150, 32 )
-custom_fonts/font = ExtResource( 4 )
-
 [node name="HBoxVersion" type="HBoxContainer" parent="VBoxMain/HBoxLanguage"]
-margin_left = 1051.0
+margin_left = 968.0
 margin_right = 1904.0
 margin_bottom = 87.0
 size_flags_horizontal = 3
 alignment = 2
 
 [node name="Label" type="Label" parent="VBoxMain/HBoxLanguage/HBoxVersion"]
-margin_left = 748.0
+margin_left = 831.0
 margin_top = 24.0
-margin_right = 853.0
+margin_right = 936.0
 margin_bottom = 62.0
 text = "v. 1.1.1"
 align = 1
@@ -95,7 +81,7 @@ alignment = 1
 margin_left = 173.0
 margin_right = 1747.0
 margin_bottom = 114.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 text = "SOFTARE ENGINEERING QUIZ GAME"
 
 [node name="VBoxGreeting" type="VBoxContainer" parent="VBoxMain"]
@@ -107,7 +93,7 @@ alignment = 1
 [node name="LabelName" type="Label" parent="VBoxMain/VBoxGreeting"]
 margin_right = 1920.0
 margin_bottom = 79.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 align = 1
 
 [node name="LabelStatsSingle" type="Label" parent="VBoxMain/VBoxGreeting"]
@@ -131,15 +117,15 @@ size_flags_stretch_ratio = 0.8
 alignment = 1
 
 [node name="HBoxMenu" type="HBoxContainer" parent="VBoxMain/VBoxContainer"]
-margin_top = 122.0
+margin_top = 148.0
 margin_right = 1920.0
-margin_bottom = 582.0
+margin_bottom = 556.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxMain/VBoxContainer/HBoxMenu"]
 margin_left = 785.0
 margin_right = 1134.0
-margin_bottom = 460.0
+margin_bottom = 408.0
 rect_min_size = Vector2( 150, 100 )
 alignment = 1
 
@@ -177,30 +163,23 @@ margin_bottom = 256.0
 rect_min_size = Vector2( 150, 48 )
 text = "SUMMARY REPORT"
 
-[node name="Settings" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
+[node name="Credits" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
 margin_top = 260.0
 margin_right = 349.0
 margin_bottom = 308.0
 rect_min_size = Vector2( 150, 48 )
-text = "SETTINGS"
-
-[node name="Credits" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 312.0
-margin_right = 349.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 150, 48 )
 text = "CREDITS"
 
 [node name="Signout" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 364.0
+margin_top = 312.0
 margin_right = 349.0
-margin_bottom = 408.0
+margin_bottom = 356.0
 text = "SIGN OUT"
 
 [node name="Quit" type="Button" parent="VBoxMain/VBoxContainer/HBoxMenu/VBoxContainer"]
-margin_top = 412.0
+margin_top = 360.0
 margin_right = 349.0
-margin_bottom = 460.0
+margin_bottom = 408.0
 rect_min_size = Vector2( 150, 48 )
 text = "QUIT"
 
