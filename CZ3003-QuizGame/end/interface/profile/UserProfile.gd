@@ -5,10 +5,14 @@ onready var back_button = $Container/VBoxContainer2/HBoxContainer/HBoxContainer2
 onready var confirm_button = $Container/VBoxContainer2/HBoxContainer/HBoxContainer/ConfirmButton
 onready var title : Label = $Container/Title
 onready var nickname : Label = $Container/VBoxContainer2/Name/LineEdit
+onready var character_class_title = $Container/VBoxContainer2/Class/Label
 onready var character_class : Label = $Container/VBoxContainer2/Class/LineEdit
+onready var choose_class_title = $Container/VBoxContainer2/ChooseClass/Label
+onready var choose_class_container = $Container/VBoxContainer2/ChooseClass/ClassChoice
 onready var notification : Label = $Container/Notification
 onready var HP : Slider = $Container/VBoxContainer2/HP/HP_Slider
 onready var AP : Slider = $Container/VBoxContainer2/AP/AP_Slider
+onready var character = $Container/Sprite
 onready var OHP = 0
 onready var OAP = 0
 onready var upgradeP = 0
@@ -45,6 +49,7 @@ var profile := {
 	"overallScore": {}
 } setget set_profile
 
+var user_character = ""
 
 func _ready() -> void:
 	if (Firebase.new_character):
@@ -53,12 +58,16 @@ func _ready() -> void:
 		nickname.set_editable(false)
 		HP.set_editable(false)
 		AP.set_editable(false)
-		back_button.hide()
+		user_character = "Mage"
+		hide_class_buttons("new")
+		
 	elif (Firebase.upgrade_character) :
 		title.set_text("UPGRADE CHARACTER")
 		fetchExistingProfiel()
 		HP.value = int(Firebase.profile.HP.integerValue)
 		AP.value = int(Firebase.profile.AP.integerValue)
+		hide_class_buttons("upgrade")
+		
 	else:
 		title.set_text("VIEW CHARACTER")
 		fetchExistingProfiel()
@@ -69,7 +78,7 @@ func _ready() -> void:
 		character_class.set_editable(false)
 		HP.set_editable(false)
 		AP.set_editable(false)
-		confirm_button.hide()
+		hide_class_buttons("view")
 		
 	#Firebase.get_document("users/%s" % Firebase.username, http)
 
@@ -182,6 +191,17 @@ func fetchExistingProfiel():
 	OAP = int(Firebase.profile.AP.integerValue)
 	upgradeP = int(Firebase.profile.upPoints.integerValue)
 	overallScore.text = str(Firebase.profile.upPoints.integerValue)
+	load_sprite(character_class)
+	
+func load_sprite(character_class):
+	if character_class.text == "Mage":
+		set_sprite("Mage")
+	
+	elif character_class.text == "Warrior":
+		set_sprite("Warrior")
+	
+	else:
+		set_sprite("???")
 
 func _on_Button_pressed():
 	Firebase.upgrade_character = false
@@ -217,4 +237,43 @@ func _on_AP_Slider_value_changed(value):
 		upgradeP += 1000
 		OAP = AP.value
 		overallScore.text = str(upgradeP)
+		
+func hide_class_buttons(type):
+	if type == "new":
+		character_class_title.hide()
+		character_class.hide()
+		back_button.hide()
+		HP.hide()
+		AP.hide()
+		var HP_title = get_node("Container/VBoxContainer2/HP/Label").hide()
+		var AP_title = get_node("Container/VBoxContainer2/AP/Label").hide()
+		var score_title = get_node("Container/VBoxContainer2/Score/Label").hide()
+		
+	elif type == "upgrade":
+		choose_class_container.hide()
+		choose_class_title.hide()
+		
+	else:
+		character_class_title.hide()
+		character_class.hide()
+		confirm_button.hide()
+
+func _on_mage_button_pressed():
+	var job = "Mage"
+	set_sprite(job)
+	character_class.text = job
+
+func _on_knight_button_pressed():
+	var job = "Warrior"
+	set_sprite(job)
+	character_class.text = job
 	
+func set_sprite(character_class):
+	if character_class == "Mage":
+		character.set_texture(load("res://backgrounds/mage_idle.png"))
+	
+	elif character_class == "Warrior":
+		character.set_texture(load("res://backgrounds/warrior_idle.png"))
+		
+	else:
+		character.set_texture(load("res://backgrounds/rouge_idle.png"))
