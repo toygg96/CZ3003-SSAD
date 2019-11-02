@@ -21,6 +21,7 @@ onready var answer_panel_3_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Pan
 onready var answer_panel_4_node = get_node("Panel/VBoxContainer/HBoxAnswers2/Panel2")
 onready var questionNum = 1
 onready var teacherToken = "7FlV5gLCeBTYuGnvLd0k0W1dHps2"
+onready var character = get_node("Panel/VBoxContainer/HBoxQuestion/MediaPanel/Panel/TextureRect/Sprite")
 
 onready var answer_nodes = [
 answer_panel_1_node.get_node("Panel/VBoxContainer/Answer1"),
@@ -29,12 +30,6 @@ answer_panel_3_node.get_node("Panel/VBoxContainer/Answer3"),
 answer_panel_4_node.get_node("Panel/VBoxContainer/Answer4")
 ]
 
-onready var gamepad_hints = [
-answer_panel_1_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint"),
-answer_panel_2_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint"),
-answer_panel_3_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint"),
-answer_panel_4_node.get_node("Panel/VBoxContainer/HBoxContainer/LabelGamepadHint")
-]
 onready var lifes_idx = 0;
 onready var AP_idx = 0;
 onready var Wscore = 0;
@@ -131,11 +126,26 @@ func _ready():
 	fetchExistingProfiel()
 	AP_bar.max_value = AP_idx
 	AP_bar.value = AP_idx
+	set_sprite(Firebase.profile.character_class.stringValue)
 	print(Firebase.user_info.id);
 	if(Firebase.customLevelBoolean):
 		Firebase.get_document("custom/%s" % Firebase.customLevelSelected + "/qns/" + ("Q"+str(questionNum)) , http)
 	else:
 		Firebase.get_document("worlds/%s" % teacherToken + "/" +  Firebase.worldSelected + "/" + Firebase.difficultySelected + "/qns/" + ("Q"+str(questionNum)) , http)	
+
+func set_sprite(job):
+	var class_title = get_node("Panel/VBoxContainer/HBoxQuestion/MediaPanel/Panel/TextureRect/ClassName")
+	
+	if job == "Mage":
+		character.set_texture(load("res://backgrounds/mage_blank_bg.png"))
+	
+	elif job == "Warrior":
+		character.set_texture(load("res://backgrounds/warrior_blank_bg.png"))
+	
+	else:
+		character.set_texture(load("res://backgrounds/rogue_blank_bg.png"))
+		
+	class_title.text = job
 
 func _on_ButtonQuit_pressed():
 	Firebase.customLevelBoolean = false	

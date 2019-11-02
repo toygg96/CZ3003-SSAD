@@ -253,8 +253,8 @@ func hide_class_buttons(type):
 		choose_class_title.hide()
 		
 	else:
-		character_class_title.hide()
-		character_class.hide()
+		choose_class_container.hide()
+		choose_class_title.hide()
 		confirm_button.hide()
 
 func _on_mage_button_pressed():
