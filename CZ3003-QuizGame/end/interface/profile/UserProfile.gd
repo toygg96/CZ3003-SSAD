@@ -190,7 +190,8 @@ func fetchExistingProfiel():
 	OHP = int(Firebase.profile.HP.integerValue)
 	OAP = int(Firebase.profile.AP.integerValue)
 	upgradeP = int(Firebase.profile.upPoints.integerValue)
-	overallScore.text = str(Firebase.profile.upPoints.integerValue)
+	print(str(upgradeP))
+	overallScore.text = str(upgradeP)
 	load_sprite(character_class)
 	
 func load_sprite(character_class):

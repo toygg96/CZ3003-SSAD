@@ -398,6 +398,8 @@ func _updateProfile():
 		UPoints += score
 		Firebase.profile.overallScore = { "integerValue": Oscore }
 		Firebase.profile.upPoints = { "integerValue": UPoints }
+		Firebase.profile.HP = { "integerValue" : lifes_idx }
+		Firebase.profile.AP = { "integerValue" : AP_idx }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
 		
