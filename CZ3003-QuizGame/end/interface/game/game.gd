@@ -207,6 +207,8 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			if (Firebase.customLevelBoolean):
 				_on_ButtonQuit_pressed()
 			else:
+				clear_questionsAnswers()
+				quiz_node.text = "Your Total Score:" + str(score) + "\n\nRedirecting back to Main Menu..."
 				_updateProfile()
 		400:
 			print("HTTP 400")
@@ -402,5 +404,5 @@ func _updateProfile():
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
 	information_sent = true
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(3.0), "timeout")
 	_on_ButtonQuit_pressed()

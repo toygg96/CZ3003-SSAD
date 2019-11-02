@@ -741,7 +741,7 @@ alignment = 1
 
 [node name="Panel" type="Control" parent="Panel/VBoxContainer/HBoxConfirm"]
 editor/display_folded = true
-margin_right = 858.0
+margin_right = 809.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 
@@ -761,14 +761,13 @@ margin_bottom = 44.0
 text = "GAME_CONFIRM"
 
 [node name="Next" type="Button" parent="Panel/VBoxContainer/HBoxConfirm"]
-visible = false
 margin_left = 813.0
 margin_right = 907.0
 margin_bottom = 44.0
 text = "NEXT"
 
 [node name="Panel2" type="Control" parent="Panel/VBoxContainer/HBoxConfirm"]
-margin_left = 862.0
+margin_left = 911.0
 margin_right = 1720.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
