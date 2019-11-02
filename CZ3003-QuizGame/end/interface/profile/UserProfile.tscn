@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://interface/profile/UserProfile.gd" type="Script" id=1]
 [ext_resource path="res://backgrounds/Cartoon_Forest_BG_04.png" type="Texture" id=2]
 [ext_resource path="res://interface/Title.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/fonts/montserrat_eb_64.tres" type="DynamicFont" id=4]
+[ext_resource path="res://backgrounds/mage_idle.png" type="Texture" id=5]
 
 [node name="UserProfile" type="Control"]
 anchor_right = 1.0
@@ -34,7 +35,7 @@ text = "EDIT PROFILE"
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container"]
 margin_top = 207.0
 margin_right = 1873.0
-margin_bottom = 797.0
+margin_bottom = 897.0
 custom_constants/separation = 15
 
 [node name="Name" type="HBoxContainer" parent="Container/VBoxContainer2"]
@@ -90,11 +91,48 @@ size_flags_horizontal = 11
 custom_fonts/font = ExtResource( 4 )
 caret_blink = true
 
-[node name="HP" type="HBoxContainer" parent="Container/VBoxContainer2"]
+[node name="ChooseClass" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 436.0
 margin_top = 208.0
 margin_right = 1436.0
-margin_bottom = 287.0
+margin_bottom = 293.0
+rect_min_size = Vector2( 1000, 0 )
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Container/VBoxContainer2/ChooseClass"]
+margin_left = 32.0
+margin_top = 3.0
+margin_right = 500.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 4 )
+text = "Choose Class:"
+
+[node name="ClassChoice" type="HBoxContainer" parent="Container/VBoxContainer2/ChooseClass"]
+editor/display_folded = true
+margin_left = 504.0
+margin_right = 967.0
+margin_bottom = 85.0
+custom_constants/separation = 20
+
+[node name="mage" type="Button" parent="Container/VBoxContainer2/ChooseClass/ClassChoice"]
+margin_right = 199.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 4 )
+text = "Mage"
+
+[node name="knight" type="Button" parent="Container/VBoxContainer2/ChooseClass/ClassChoice"]
+margin_left = 219.0
+margin_right = 463.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 4 )
+text = "Knight"
+
+[node name="HP" type="HBoxContainer" parent="Container/VBoxContainer2"]
+margin_left = 436.0
+margin_top = 308.0
+margin_right = 1436.0
+margin_bottom = 387.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -121,9 +159,9 @@ ticks_on_borders = true
 
 [node name="AP" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 436.0
-margin_top = 302.0
+margin_top = 402.0
 margin_right = 1436.0
-margin_bottom = 381.0
+margin_bottom = 481.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -150,9 +188,9 @@ ticks_on_borders = true
 
 [node name="Score" type="HBoxContainer" parent="Container/VBoxContainer2"]
 margin_left = 436.0
-margin_top = 396.0
+margin_top = 496.0
 margin_right = 1436.0
-margin_bottom = 475.0
+margin_bottom = 575.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 25
@@ -168,21 +206,23 @@ custom_fonts/font = ExtResource( 4 )
 text = "Score:"
 
 [node name="Label2" type="Label" parent="Container/VBoxContainer2/Score"]
-margin_left = 500.0
-margin_right = 1000.0
+margin_left = 737.0
+margin_right = 737.0
 margin_bottom = 79.0
 custom_fonts/font = ExtResource( 4 )
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2"]
-margin_top = 490.0
+editor/display_folded = true
+margin_top = 590.0
 margin_right = 1873.0
-margin_bottom = 575.0
+margin_bottom = 675.0
+custom_constants/separation = 40
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 663.0
-margin_right = 869.0
+margin_left = 645.0
+margin_right = 851.0
 margin_bottom = 85.0
 
 [node name="BackButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer2"]
@@ -190,12 +230,13 @@ margin_right = 206.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 206, 85 )
 custom_fonts/font = ExtResource( 4 )
+custom_constants/hseparation = 0
 text = "BACK"
 align = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 873.0
-margin_right = 1209.0
+margin_left = 891.0
+margin_right = 1227.0
 margin_bottom = 85.0
 
 [node name="ConfirmButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer"]
@@ -203,24 +244,33 @@ margin_right = 336.0
 margin_bottom = 85.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
+custom_constants/hseparation = 0
 text = "CONFIRM"
 align = 2
 
 [node name="stats" type="VBoxContainer" parent="Container/VBoxContainer2"]
-margin_top = 590.0
+margin_top = 690.0
 margin_right = 1873.0
-margin_bottom = 590.0
+margin_bottom = 690.0
+
+[node name="Sprite" type="Sprite" parent="Container"]
+position = Vector2( 50, 300 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="Notification" type="Label" parent="Container"]
-margin_top = 847.0
+margin_top = 947.0
 margin_right = 1873.0
-margin_bottom = 926.0
+margin_bottom = 1026.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
 align = 1
 autowrap = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="Container/VBoxContainer2/ChooseClass/ClassChoice/mage" to="." method="_on_mage_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer2/ChooseClass/ClassChoice/knight" to="." method="_on_knight_button_pressed"]
 [connection signal="value_changed" from="Container/VBoxContainer2/HP/HP_Slider" to="." method="_on_HP_Slider_value_changed"]
 [connection signal="value_changed" from="Container/VBoxContainer2/AP/AP_Slider" to="." method="_on_AP_Slider_value_changed"]
 [connection signal="pressed" from="Container/VBoxContainer2/HBoxContainer/HBoxContainer2/BackButton" to="." method="_on_Button_pressed"]
