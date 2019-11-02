@@ -355,18 +355,15 @@ func fetchExistingProfiel():
 func _updateProfile():
 	if score > WLvlScore:
 		if(Firebase.levelSelected == 1):
-			var buff1 = "W%s"%int(Firebase.worldSelected) + "L2Score" 
-			var buff2 = "W%s"%int(Firebase.worldSelected) + "L3Score"
-			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
+			var buffs = get_buffs("L2Score", "L3Score")
+			Wscore = update_world_score(score, buffs[0], buffs[1])
 		if(Firebase.levelSelected == 2):
-			var buff1 = "W%s"%int(Firebase.worldSelected) + "L1Score" 
-			var buff2 = "W%s"%int(Firebase.worldSelected) + "L3Score"
-			print(Firebase.profile.get(buff1).integerValue)
-			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
+			var buffs = get_buffs("L1Score", "L3Score")
+			Wscore = update_world_score(score, buffs[0], buffs[1])
 		if(Firebase.levelSelected == 3):
-			var buff1 = "W%s"%int(Firebase.worldSelected) + "L1Score" 
-			var buff2 = "W%s"%int(Firebase.worldSelected) + "L2Score"
-			Wscore =  score + int(Firebase.profile.get(buff1).integerValue) + int(Firebase.profile.get(buff2).integerValue)
+			var buffs = get_buffs("L1Score", "L2Score")
+			Wscore = update_world_score(score, buffs[0], buffs[1])
+			
 		if int(Firebase.worldSelected) == 1:
 			Firebase.profile.W1Score = { "integerValue": Wscore }
 			match int(Firebase.levelSelected):
@@ -403,6 +400,16 @@ func _updateProfile():
 		Firebase.profile.upPoints = { "integerValue": UPoints }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 		print(Firebase.profile)
+		
 	information_sent = true
 	yield(get_tree().create_timer(3.0), "timeout")
 	_on_ButtonQuit_pressed()
+	
+func update_world_score(score, buff1, buff2):
+	return score + buff1 + buff2
+	
+func get_buffs(level_score1, level_score2):
+	var buff1 = "W%s"%int(Firebase.worldSelected) + level_score1
+	var buff2 = "W%s"%int(Firebase.worldSelected) + level_score2
+	
+	return [int(Firebase.profile.get(buff1).integerValue), int(Firebase.profile.get(buff2).integerValue)]
