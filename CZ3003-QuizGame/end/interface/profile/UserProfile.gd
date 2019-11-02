@@ -85,7 +85,6 @@ func _ready() -> void:
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(response_code)
 	match response_code:
 		404:
 			notification.text = "Please, enter your information"
@@ -163,10 +162,12 @@ func _on_ConfirmButton_pressed() -> void:
 			profile.W5L1Score = { "integerValue": Firebase.profile.W5L1Score.integerValue}
 			profile.W5L2Score = { "integerValue": Firebase.profile.W5L2Score.integerValue}
 			profile.W5L3Score = { "integerValue": Firebase.profile.W5L3Score.integerValue}
+			profile.W6Score = { "integerValue": Firebase.profile.W6Score.integerValue}
 			profile.upPoints = { "integerValue": upgradeP }
 			profile.overallScore = { "integerValue": Firebase.profile.overallScore.integerValue }
 			information_sent = true
 			Firebase.upgrade_character = false
+			print(profile)
 			Firebase.update_document("users/%s" % Firebase.username, profile, http)
 			#get_tree().change_scene("res://interface/MenuGame.tscn")
 
