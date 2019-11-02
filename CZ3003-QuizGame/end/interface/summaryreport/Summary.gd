@@ -5,13 +5,6 @@ onready var notification = get_node("Score container/scores/report")
 onready var search_input = get_node("Score container/searchbar/SearchInput")
 
 var user_list = []
-var average_overall_score = 0
-var average_w1_score = 0
-var average_w2_score = 0
-var average_w3_score = 0
-var average_w4_score = 0
-var average_w5_score = 0
-var average_w6_score = 0
 var defaultText = ""
 
 func _ready():
@@ -31,29 +24,46 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 				
 				user_list.append(user)
 				
-			# print(user_list)
-			generate_scores()
+			generate_scores(user_list)
 			
-func generate_scores():
-	for user in user_list:
-		average_overall_score += int(user.fields.overallScore.integerValue)
-		average_w1_score += int(user.fields.W1Score.integerValue)
-		average_w2_score += int(user.fields.W2Score.integerValue)
-		average_w3_score += int(user.fields.W3Score.integerValue)
-		average_w4_score += int(user.fields.W4Score.integerValue)
-		average_w5_score += int(user.fields.W5Score.integerValue)
-		average_w6_score += int(user.fields.W6Score.integerValue)
+func generate_scores(user_list):
+	var score_list = []
+
+	score_list = compute_total_scores(user_list)
+
+	score_list[0] = gen_average_score(score_list[0], user_list.size())
+	score_list[1] = gen_average_score(score_list[1], user_list.size())
+	score_list[2] = gen_average_score(score_list[2], user_list.size())
+	score_list[3] = gen_average_score(score_list[3], user_list.size())
+	score_list[4] = gen_average_score(score_list[4], user_list.size())
+	score_list[5] = gen_average_score(score_list[5], user_list.size())
+	score_list[6] = gen_average_score(score_list[6], user_list.size())
 	
-	average_overall_score /= user_list.size()
-	average_w1_score /= user_list.size()
-	average_w2_score /= user_list.size()
-	average_w3_score /= user_list.size()
-	average_w4_score /= user_list.size()
-	average_w5_score /= user_list.size()
-	average_w6_score /= user_list.size()
-	
-	defaultText = "Average Overall Score: " + str(average_overall_score) + "\nAverage World 1 Score: " + str(average_w1_score) + "\nAverage World 2 Score: " + str(average_w2_score) + "\nAverage World 3 Score: " + str(average_w3_score) + "\nAverage World 4 Score: " + str(average_w4_score) + "\nAverage World 5 Score: " + str(average_w5_score) + "\nAverage World 6 Score: " + str(average_w6_score)
+	defaultText = "Average Overall Score: " + str(score_list[0]) + "\nAverage World 1 Score: " + str(score_list[1]) + "\nAverage World 2 Score: " + str(score_list[2]) + "\nAverage World 3 Score: " + str(score_list[3]) + "\nAverage World 4 Score: " + str(score_list[4]) + "\nAverage World 5 Score: " + str(score_list[5]) + "\nAverage World 6 Score: " + str(score_list[6])
 	notification.text = defaultText
+	
+func compute_total_scores(user_list):
+	var w1_score = 0
+	var w2_score = 0
+	var w3_score = 0
+	var w4_score = 0
+	var w5_score = 0
+	var w6_score = 0
+	var overall_score = 0
+	
+	for user in user_list:
+		overall_score += int(user.fields.overallScore.integerValue)
+		w1_score += int(user.fields.W1Score.integerValue)
+		w2_score += int(user.fields.W2Score.integerValue)
+		w3_score += int(user.fields.W3Score.integerValue)
+		w4_score += int(user.fields.W4Score.integerValue)
+		w5_score += int(user.fields.W5Score.integerValue)
+		w6_score += int(user.fields.W6Score.integerValue)
+		
+	return [overall_score, w1_score, w2_score, w3_score, w4_score, w5_score, w6_score]
+	
+func gen_average_score(score, length):
+	return score / length
 	
 func _on_search_button_pressed():
 	var username = ""
