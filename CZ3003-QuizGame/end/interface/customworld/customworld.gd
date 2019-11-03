@@ -54,6 +54,3 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 				profile = users
 				profile.name = profile.name.replace("projects/ssadquiz/databases/(default)/documents/custom/", "")
 				user.append(profile)
-
-				
-

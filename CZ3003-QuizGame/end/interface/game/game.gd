@@ -270,8 +270,8 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
-		print("AP left : ", AP_idx)
 		_consume_AP(AP_idx)
+		print("AP left : ", AP_idx)
 	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
 		highlight_answer(answer_nodes[num-1],answer_correct)
@@ -280,8 +280,8 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
-		print("AP left : ", AP_idx)
 		_consume_AP(AP_idx)
+		print("AP left : ", AP_idx)
 	else:
 		player_wrong.play()
 		highlight_answer(answer_nodes[num-1],answer_error)
@@ -402,8 +402,6 @@ func _updateProfile():
 		UPoints += score
 		Firebase.profile.overallScore = { "integerValue": Oscore }
 		Firebase.profile.upPoints = { "integerValue": UPoints }
-		Firebase.profile.HP = { "integerValue" : lifes_idx }
-		Firebase.profile.AP = { "integerValue" : AP_idx }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
 	information_sent = true
 	yield(get_tree().create_timer(3.0), "timeout")

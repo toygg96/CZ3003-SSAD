@@ -93,6 +93,7 @@ func save_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 func get_document(path: String, http: HTTPRequest) -> void:
 	var url := FIRESTORE_URL + path
 	http.request(url, _get_request_headers(), false, HTTPClient.METHOD_GET)
+	yield(get_tree().create_timer(2.0), "timeout")
 
 func update_document(path: String, fields: Dictionary, http: HTTPRequest) -> void:
 	var document := { "fields": fields }
