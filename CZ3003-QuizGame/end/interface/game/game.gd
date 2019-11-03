@@ -195,7 +195,7 @@ func _generate_player_life(life: int)->void:
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(result_body)
+	print(response_code)
 	match response_code:
 		404:
 			print("No record found")
@@ -270,6 +270,7 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
+		print("AP left : ", AP_idx)
 		_consume_AP(AP_idx)
 	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
@@ -279,6 +280,7 @@ func checkAnswer(ev,num):
 		next_button.show()
 		score += 1000
 		score_label_node.text = str(score)
+		print("AP left : ", AP_idx)
 		_consume_AP(AP_idx)
 	else:
 		player_wrong.play()
@@ -323,6 +325,8 @@ func clear_questionsAnswers():
 
 func _on_Next_pressed():
 	if AP_idx == 0:
+		clear_questionsAnswers()
+		quiz_node.text = "Not enough AP to continue with this level. Please UPGRADE your character in the Upgrade Character screen and reattempt the LEVEL"
 		_on_ButtonQuit_pressed()
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
@@ -401,8 +405,6 @@ func _updateProfile():
 		Firebase.profile.HP = { "integerValue" : lifes_idx }
 		Firebase.profile.AP = { "integerValue" : AP_idx }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
-		print(Firebase.profile)
-		
 	information_sent = true
 	yield(get_tree().create_timer(3.0), "timeout")
 	_on_ButtonQuit_pressed()

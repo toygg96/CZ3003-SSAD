@@ -28,9 +28,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		200:
 			for users in result_body.documents:
 				profile = users.fields
-				print(users.fields)
 				if (profile.nickname.stringValue != "GodMode") :
-					print("Correct username: " + profile.nickname.stringValue)
 					user.append(profile)
 			bubbleSortRankings()
 			while(count < 10):
