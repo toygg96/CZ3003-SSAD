@@ -34,15 +34,17 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 					print(count)
 					return
 				else:
-					#print(user[count]["nickname"]["stringValue"])
-					#print(user[count]["overallScore"]["integerValue"])
+					print(user[count]["nickname"]["stringValue"])
+					print(user[count]["overallScore"]["integerValue"])
 					notification.text = notification.text + user[count]["nickname"]["stringValue"] + "\t " + str(user[count]["overallScore"]["integerValue"] + "\n")
 					count+=1
 
 func bubbleSortRankings():
 	for i in range(user.size()-1, -1, -1):	
 		for j in range(1,i+1,1):
-			if(user[j]["overallScore"]["integerValue"] > user[j-1]["overallScore"]["integerValue"]):
+			var tempAScoreValue = int(user[j]["overallScore"]["integerValue"])
+			var tempBScoreValue = int(user[j-1]["overallScore"]["integerValue"])
+			if(tempAScoreValue > tempBScoreValue):
 				var temp = user[j-1]
 				user[j-1] = user[j]
 				user[j] = temp
