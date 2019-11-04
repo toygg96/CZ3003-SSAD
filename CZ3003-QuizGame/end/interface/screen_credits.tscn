@@ -24,9 +24,9 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="HBoxHeader" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 360.0
+margin_top = 319.0
 margin_right = 1920.0
-margin_bottom = 474.0
+margin_bottom = 433.0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxHeader"]
@@ -37,9 +37,9 @@ custom_fonts/font = ExtResource( 4 )
 text = "CREDITS"
 
 [node name="HBoxGodot" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 478.0
+margin_top = 437.0
 margin_right = 1920.0
-margin_bottom = 562.0
+margin_bottom = 521.0
 rect_min_size = Vector2( 100, 50 )
 custom_constants/separation = 10
 alignment = 1
@@ -73,29 +73,30 @@ rect_clip_content = false
 bbcode_enabled = true
 
 [node name="HBoxFont" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 566.0
+margin_top = 525.0
 margin_right = 1920.0
-margin_bottom = 645.0
+margin_bottom = 686.0
 rect_min_size = Vector2( 100, 70 )
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxFont"]
-editor/display_folded = true
 margin_left = 309.0
 margin_right = 1611.0
-margin_bottom = 79.0
+margin_bottom = 161.0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxFont/VBoxContainer"]
 margin_right = 1302.0
-margin_bottom = 79.0
+margin_bottom = 161.0
 text = "Dev Team:Joseph Fung, Jarrold Tan
-Documentation Team:Qwek Zhi Hui, Jan Owyeong, Rong En, Jia Cheng, Daniel Yap, Daniel Dtuli"
+Documentation Team:Qwek Zhi Hui, Jan Owyeong, Rong En, Jia Cheng, Daniel Yap, Daniel Dtuli
+https://craftpix.net/freebies/free-cartoon-forest-game-backgrounds/
+https://craftpix.net/freebies/assassin-mage-viking-free-pixel-art-game-heroes/"
 
 [node name="HBoxControls" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 649.0
+margin_top = 690.0
 margin_right = 1920.0
-margin_bottom = 719.0
+margin_bottom = 760.0
 rect_min_size = Vector2( 100, 70 )
 alignment = 1
 
