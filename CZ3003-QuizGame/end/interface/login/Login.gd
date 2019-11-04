@@ -23,7 +23,10 @@ func _on_LoginButton_pressed() -> void:
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var response_body := JSON.parse(body.get_string_from_ascii())
 	if response_code != 200:
-		notification.text = response_body.result.error.message.capitalize()
+		if(response_body.result.error.message.capitalize() != "Email Not Found"):
+			notification.text = response_body.result.error.message.capitalize()
+		else:
+			notification.text = "User not found!"
 		return
 	else:
 		notification.text = "Sign in sucessful!"
