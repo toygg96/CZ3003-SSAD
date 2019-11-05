@@ -28,25 +28,25 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		200:
 			for users in result_body.documents:
 				profile = users.fields
-				print(users.fields)
+				# print(users.fields)
 				if (profile.nickname.stringValue != "GodMode") :
-					print("Correct username: " + profile.nickname.stringValue)
+					# print("Correct username: " + profile.nickname.stringValue)
 					user.append(profile)
 			bubbleSortRankings()
 			while(count < 10):
 				if(count == (user.size())):
-					print(count)
+					# print(count)
 					return
 				else:
-					print(user[count]["nickname"]["stringValue"])
-					print(user[count]["overallScore"]["integerValue"])
+					#print(user[count]["nickname"]["stringValue"])
+					#print(user[count]["overallScore"]["integerValue"])
 					notification.text = notification.text + user[count]["nickname"]["stringValue"] + "\t " + str(user[count]["overallScore"]["integerValue"] + "\n")
 					count+=1
 
 func bubbleSortRankings():
 	for i in range(user.size()-1, -1, -1):
- 		 for j in range(1,i+1,1):
-		    if (user[j]["overallScore"]["integerValue"] > user[j-1]["overallScore"]["integerValue"]):
+		for j in range(1,i+1,1):
+			if (user[j]["overallScore"]["integerValue"] > user[j-1]["overallScore"]["integerValue"]):
       			var temp = user[j]
 	      		user[j] = user[j-1]
 	      		user[j-1] = temp
