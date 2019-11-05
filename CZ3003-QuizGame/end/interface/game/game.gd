@@ -205,7 +205,9 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			print(Firebase.customLevelBoolean)
 			#http.set_use_threads(true)
 			if (Firebase.customLevelBoolean):
-				_on_ButtonQuit_pressed()
+				clear_questionsAnswers()
+				quiz_node.text = "Your Total Score:" + str(score) + "\n\nRedirecting back to Main Menu..."
+				update_world6_score()
 			else:
 				clear_questionsAnswers()
 				quiz_node.text = "Your Total Score:" + str(score) + "\n\nRedirecting back to Main Menu..."
@@ -352,7 +354,8 @@ func fetchExistingProfiel():
 	lifes_idx = int(Firebase.profile.HP.integerValue)
 	AP_idx = int(Firebase.profile.AP.integerValue)
 	Wscore = int(Firebase.profile.get(wstring).integerValue) 
-	WLvlScore = int(Firebase.profile.get(wLvlString).integerValue)
+	if(!Firebase.customLevelBoolean):
+		WLvlScore = int(Firebase.profile.get(wLvlString).integerValue)
 	Oscore = int(Firebase.profile.overallScore.integerValue)
 	UPoints = int(Firebase.profile.upPoints.integerValue)
 	
@@ -409,6 +412,17 @@ func _updateProfile():
 	
 func update_world_score(score, buff1, buff2):
 	return score + buff1 + buff2
+
+func update_world6_score():
+	var W6Score = int(Firebase.profile.W6Score.integerValue) + score
+	Oscore = int(Firebase.profile.W1Score.integerValue) + int(Firebase.profile.W2Score.integerValue) + int(Firebase.profile.W3Score.integerValue) + int(Firebase.profile.W4Score.integerValue) + int(Firebase.profile.W5Score.integerValue) + W6Score
+	Firebase.profile.W6Score = { "integerValue" : W6Score }
+	Firebase.profile.overallScore = { "integerValue": Oscore }
+	Firebase.profile.upPoints = { "integerValue": UPoints }
+	Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
+	information_sent = true
+	yield(get_tree().create_timer(3.0), "timeout")
+	_on_ButtonQuit_pressed()
 	
 func get_buffs(level_score1, level_score2):
 	var buff1 = "W%s"%int(Firebase.worldSelected) + level_score1

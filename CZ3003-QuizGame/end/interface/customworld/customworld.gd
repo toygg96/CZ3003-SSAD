@@ -38,6 +38,7 @@ func custom_level_pressed(button):
 	print(button.text)
 	Firebase.customLevelSelected = button.text
 	Firebase.customLevelBoolean = true
+	Firebase.levelSelected = 0
 	return get_tree().change_scene("res://interface/game/game.tscn")
 	
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
