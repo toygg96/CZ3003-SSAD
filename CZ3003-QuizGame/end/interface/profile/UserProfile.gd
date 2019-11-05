@@ -17,6 +17,8 @@ onready var OHP = 0
 onready var OAP = 0
 onready var upgradeP = 0
 onready var overallScore : Label = $Container/VBoxContainer2/Score/Label2
+onready var scoreLabelForUpradeChar : Label = $Container/VBoxContainer2/Score/Label
+onready var firstInit = true
 
 var information_sent := false
 var profile := {
@@ -82,7 +84,6 @@ func _ready() -> void:
 		
 	#Firebase.get_document("users/%s" % Firebase.username, http)
 
-
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
 	match response_code:
@@ -97,7 +98,6 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 				Firebase.new_character = false
 				get_tree().change_scene("res://interface/MenuGame.tscn")
 			self.profile = result_body.fields
-
 
 func _on_ConfirmButton_pressed() -> void:
 	if nickname.text.empty() or character_class.text.empty():
@@ -184,18 +184,16 @@ func fetchExistingProfiel():
 	nickname.text = Firebase.profile.nickname.stringValue
 	character_class.text = Firebase.profile.character_class.stringValue
 	HP.value = int(Firebase.profile.HP.integerValue)
-	print(Firebase.profile.HP.integerValue)
 	AP.value = int(Firebase.profile.AP.integerValue)
-	print(Firebase.profile.AP.integerValue)
 	OHP = int(Firebase.profile.HP.integerValue)
 	OAP = int(Firebase.profile.AP.integerValue)
 	upgradeP = int(Firebase.profile.upPoints.integerValue)
-	overallScore.text = str(Firebase.profile.upPoints.integerValue)
+	overallScore.text = str(upgradeP)
 	load_sprite(character_class)
 	
 func load_sprite(character_class):
 	if character_class.text == "Mage":
-		set_sprite("Mage")
+		set_sprite("Mage")	
 	
 	elif character_class.text == "Warrior":
 		set_sprite("Warrior")
@@ -215,14 +213,17 @@ func _on_HP_Slider_value_changed(value):
 		else:
 			upgradeP -= 500
 			OHP = HP.value
-			overallScore.text = str(upgradeP)
+			if(!(firstInit)):
+				overallScore.text = str(upgradeP)
+			firstInit = false
 			return
 	elif HP.value <= OHP:
 		upgradeP += 500	
 		OHP = HP.value
-		overallScore.text = str(upgradeP)
+		if(!(firstInit)):
+			overallScore.text = str(upgradeP)
+		firstInit = false
 	
-
 func _on_AP_Slider_value_changed(value):
 	if AP.value >= OAP:
 		if upgradeP < 1000:
@@ -231,12 +232,16 @@ func _on_AP_Slider_value_changed(value):
 		else:
 			upgradeP -= 1000
 			OAP = AP.value
-			overallScore.text = str(upgradeP)
+			if(!(firstInit)):
+				overallScore.text = str(upgradeP)
+			firstInit = false
 			return
 	elif AP.value <= OAP:
 		upgradeP += 1000
 		OAP = AP.value
-		overallScore.text = str(upgradeP)
+		if(!(firstInit)):
+			overallScore.text = str(upgradeP)
+		firstInit = false
 		
 func hide_class_buttons(type):
 	if type == "new":
@@ -250,6 +255,7 @@ func hide_class_buttons(type):
 		var score_title = get_node("Container/VBoxContainer2/Score/Label").hide()
 		
 	elif type == "upgrade":
+		scoreLabelForUpradeChar.text = "Upgrade Points: "
 		choose_class_container.hide()
 		choose_class_title.hide()
 		

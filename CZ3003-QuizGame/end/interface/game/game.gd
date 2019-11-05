@@ -195,7 +195,7 @@ func _generate_player_life(life: int)->void:
 
 func _on_HTTPRequest_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 	var result_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(result_body)
+	print(response_code)
 	match response_code:
 		404:
 			print("No record found")
@@ -205,7 +205,9 @@ func _on_HTTPRequest_request_completed(result: int, response_code: int, headers:
 			print(Firebase.customLevelBoolean)
 			#http.set_use_threads(true)
 			if (Firebase.customLevelBoolean):
-				_on_ButtonQuit_pressed()
+				clear_questionsAnswers()
+				quiz_node.text = "Your Total Score:" + str(score) + "\n\nRedirecting back to Main Menu..."
+				update_world6_score()
 			else:
 				clear_questionsAnswers()
 				quiz_node.text = "Your Total Score:" + str(score) + "\n\nRedirecting back to Main Menu..."
@@ -271,6 +273,7 @@ func checkAnswer(ev,num):
 		score += 1000
 		score_label_node.text = str(score)
 		_consume_AP(AP_idx)
+		print("AP left : ", AP_idx)
 	elif (ev is InputEventScreenTouch) and ev.pressed and question.correctAns.stringValue == "Answer" + str(num):
 		player_correct.play()
 		highlight_answer(answer_nodes[num-1],answer_correct)
@@ -280,6 +283,7 @@ func checkAnswer(ev,num):
 		score += 1000
 		score_label_node.text = str(score)
 		_consume_AP(AP_idx)
+		print("AP left : ", AP_idx)
 	else:
 		player_wrong.play()
 		highlight_answer(answer_nodes[num-1],answer_error)
@@ -323,6 +327,8 @@ func clear_questionsAnswers():
 
 func _on_Next_pressed():
 	if AP_idx == 0:
+		clear_questionsAnswers()
+		quiz_node.text = "Not enough AP to continue with this level. Please UPGRADE your character in the Upgrade Character screen and reattempt the LEVEL"
 		_on_ButtonQuit_pressed()
 	questionNum = questionNum + 1
 	print("questionNum: Q" + str(questionNum))
@@ -348,7 +354,8 @@ func fetchExistingProfiel():
 	lifes_idx = int(Firebase.profile.HP.integerValue)
 	AP_idx = int(Firebase.profile.AP.integerValue)
 	Wscore = int(Firebase.profile.get(wstring).integerValue) 
-	WLvlScore = int(Firebase.profile.get(wLvlString).integerValue)
+	if(!Firebase.customLevelBoolean):
+		WLvlScore = int(Firebase.profile.get(wLvlString).integerValue)
 	Oscore = int(Firebase.profile.overallScore.integerValue)
 	UPoints = int(Firebase.profile.upPoints.integerValue)
 	
@@ -399,14 +406,23 @@ func _updateProfile():
 		Firebase.profile.overallScore = { "integerValue": Oscore }
 		Firebase.profile.upPoints = { "integerValue": UPoints }
 		Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
-		print(Firebase.profile)
-		
 	information_sent = true
 	yield(get_tree().create_timer(3.0), "timeout")
 	_on_ButtonQuit_pressed()
 	
 func update_world_score(score, buff1, buff2):
 	return score + buff1 + buff2
+
+func update_world6_score():
+	var W6Score = int(Firebase.profile.W6Score.integerValue) + score
+	Oscore = int(Firebase.profile.W1Score.integerValue) + int(Firebase.profile.W2Score.integerValue) + int(Firebase.profile.W3Score.integerValue) + int(Firebase.profile.W4Score.integerValue) + int(Firebase.profile.W5Score.integerValue) + W6Score
+	Firebase.profile.W6Score = { "integerValue" : W6Score }
+	Firebase.profile.overallScore = { "integerValue": Oscore }
+	Firebase.profile.upPoints = { "integerValue": UPoints }
+	Firebase.update_document("users/%s" % Firebase.username, Firebase.profile , http)
+	information_sent = true
+	yield(get_tree().create_timer(3.0), "timeout")
+	_on_ButtonQuit_pressed()
 	
 func get_buffs(level_score1, level_score2):
 	var buff1 = "W%s"%int(Firebase.worldSelected) + level_score1

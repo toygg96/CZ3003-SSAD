@@ -36,7 +36,6 @@ var profile := {
 
 func set_profile(value: Dictionary) -> void:
 	profile = value
-	print(value)
 	Firebase.profile=profile
 	username.text = "Welcome " + profile.nickname.stringValue
 	

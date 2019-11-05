@@ -233,11 +233,12 @@ custom_fonts/font = ExtResource( 5 )
 margin_top = 606.0
 margin_right = 1870.0
 margin_bottom = 691.0
+custom_constants/separation = 40
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
-margin_left = 702.0
-margin_right = 908.0
+margin_left = 684.0
+margin_right = 890.0
 margin_bottom = 85.0
 
 [node name="Button" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer2"]
@@ -246,12 +247,11 @@ margin_bottom = 85.0
 rect_min_size = Vector2( 206, 85 )
 custom_fonts/font = ExtResource( 5 )
 text = "BACK"
-align = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer2/HBoxContainer"]
 editor/display_folded = true
-margin_left = 912.0
-margin_right = 1168.0
+margin_left = 930.0
+margin_right = 1186.0
 margin_bottom = 85.0
 
 [node name="ConfirmButton" type="Button" parent="Container/VBoxContainer2/HBoxContainer/HBoxContainer"]
