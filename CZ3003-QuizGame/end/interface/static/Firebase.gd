@@ -1,12 +1,12 @@
 extends Node
 
-const API_KEY := "AIzaSyAv1kf80Njt5hTognnQjLjewWLP8tPTFso"
+const API_KEY := "TOKEN"
 const PROJECT_ID := "ssadquiz"
 
 const REGISTER_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=%s" % API_KEY
 const LOGIN_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=%s" % API_KEY
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
-const FB_URL := "https://graph.facebook.com/v4.0/108881370543869/feed?&access_token=EAAF6NXFLmHoBAEqbVPgGMiXvbKVDZC0ZCZCYZAlMPrVxk8ZB1dxMhvLKpLqU04KM9ZBB3SHQOnR6KYwsqrqu14mn7C1jXTPiDYDzaYrxdxpmLZBmrJZBoXWDk6U02LGvysH7BZCbpPhgcLPj4Ue3ZBCPlnqElR1OqYI7K93NvdsMoZAhZBJmtNLWv7EjBuhLF7btl7MZD&message="
+const FB_URL := "https://graph.facebook.com/v4.0/108881370543869/feed?&access_token={token}&message="
 const TWITTER_URL := "http://13.251.78.203:3000/twitter/"
 onready var profile := {
 	"nickname": {},
