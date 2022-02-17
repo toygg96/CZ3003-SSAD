@@ -12,9 +12,9 @@ Features:
 6) Shares to social media (Fb, Twitter) that a question has been set and invite people to download the app to try it
 
 Tech stack:
-Godot
-Firebase authentication
-Firebase
+1) Godot
+2) Firebase authentication
+3) Firebase
 
 ![SE Quiz game4](https://user-images.githubusercontent.com/16291759/154521104-e2a17d63-dfb5-4223-ae2d-d3f0b7aab3a3.jpeg)
 ![SE Quiz game2](https://user-images.githubusercontent.com/16291759/154521080-4084af50-5c52-4b5b-97c8-514f62e7ed32.jpeg)
